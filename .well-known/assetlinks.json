@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.uitvaartplatform.twa",
+        "sha256_cert_fingerprints": ["75:E0:77:95:8A:71:31:0F:11:83:A1:6D:E8:64:B1:DE:05:1E:B0:FB:F5:53:D6:33:89:F2:F1:89:9E:1A:BC:A2"]
+      }
+    }]
