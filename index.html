@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Uitvaart-Platform App</title>
+<meta name="theme-color" content="#4a1942">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Uitvaart-Platform">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#4a1942; --plum2:#6C3D5C; --orange:#e8834a; --orange2:#c8622a;
+  --cream:#faf7f2; --cream2:#f3ece2; --ink:#2c1428; --muted:#8c7f88;
+  --line:#ece2ec; --soft:#f6eef4; --lav:#c9bcd2; --green:#eaf3ec; --greentx:#3c7a52;
+  --sans:'Poppins',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased;
+  background:radial-gradient(120% 80% at 80% 0%, #efe2ee 0%, transparent 55%), linear-gradient(150deg,#f3ecf2,#efe7e0);
+  min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px 16px}
+.cap{text-align:center; color:#6b5d68; margin-bottom:14px}
+.cap .pill{display:inline-block; background:#fff; border:1px solid #e6dbe6; color:var(--plum2); font-size:.72rem; font-weight:600; padding:5px 12px; border-radius:20px; letter-spacing:.4px; margin-bottom:8px}
+.cap p{font-size:.86rem} .cap b{color:var(--plum)}
+
+.phone{position:relative; width:392px; height:min(848px,92vh); background:#160b14; border-radius:52px; padding:13px; box-shadow:0 40px 90px rgba(40,12,36,.4); flex:none}
+.screen{position:relative; width:100%; height:100%; background:var(--cream); border-radius:40px; overflow:hidden; display:flex; flex-direction:column}
+.island{position:absolute; top:9px; left:50%; transform:translateX(-50%); width:108px; height:30px; background:#160b14; border-radius:18px; z-index:80}
+.status{height:46px; flex:none; display:flex; align-items:flex-end; justify-content:space-between; padding:0 26px 5px; font-size:.78rem; font-weight:600; z-index:50}
+.status .r{display:flex; gap:6px; align-items:center}
+.status svg{width:16px;height:16px}
+
+.body{position:relative; flex:1; min-height:0}
+.scr{position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; display:none; -webkit-overflow-scrolling:touch}
+.scr.on{display:block; animation:fade .28s ease}
+@keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+.scr::-webkit-scrollbar{width:0}
+.pad{padding:18px 16px 26px}
+
+.hd{position:sticky; top:0; z-index:20; background:linear-gradient(135deg,var(--plum),var(--plum2)); color:#fff; padding:16px 16px 17px; border-radius:0 0 22px 22px}
+.hd .hrow{display:flex; align-items:center; gap:11px}
+.hd .bf{width:28px; color:#fff; flex:none}
+.hd h1{font-size:1.12rem; font-weight:600}
+.hd .sub{font-size:.8rem; color:rgba(255,255,255,.78); margin-top:3px; font-weight:300; line-height:1.4}
+.hd .menu{margin-left:auto; width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.16);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.hd .menu svg{width:20px;height:20px}
+.hd.simple{display:flex; align-items:center; gap:11px}
+.back{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.16);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.back svg{width:18px;height:18px}
+
+.tile{background:#fff; border:1px solid var(--line); border-radius:18px; padding:15px; cursor:pointer; transition:transform .15s, box-shadow .15s; text-align:left; width:100%}
+.tile:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(74,25,66,.08)}
+.tile .ic{width:42px;height:42px;border-radius:13px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--plum);margin-bottom:10px}
+.tile .ic svg{width:22px;height:22px}
+.tile h3{font-size:.92rem;font-weight:600}
+.tile p{font-size:.74rem;color:var(--muted);margin-top:3px;line-height:1.4}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.sect-t{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--plum2);margin:24px 2px 12px;display:flex;align-items:center;justify-content:space-between}
+.sect-t a{color:var(--orange);font-weight:600;font-size:.74rem;cursor:pointer;text-transform:none;letter-spacing:0}
+
+.row{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px 14px;margin-bottom:9px;cursor:pointer;transition:background .15s;width:100%;text-align:left}
+.row:hover{background:var(--soft)}
+.row .ic{width:40px;height:40px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--plum);flex:none}
+.row .ic svg{width:20px;height:20px}
+.row .tx{flex:1;min-width:0}
+.row .tx h3{font-size:.9rem;font-weight:600}
+.row .tx p{font-size:.74rem;color:var(--muted);margin-top:2px;line-height:1.35}
+.row .ext{color:#c4b6c2;flex:none}
+.row .ext svg{width:17px;height:17px}
+.intro{font-size:.84rem;color:var(--muted);line-height:1.55;margin-bottom:14px}
+
+/* artikelen */
+.artcard{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:13px;cursor:pointer;text-decoration:none;color:inherit}
+.artcard .img{height:128px;background:var(--cream2) center/cover no-repeat;position:relative}
+.artcard .cat{position:absolute;top:10px;left:10px;background:rgba(74,25,66,.9);color:#fff;font-size:.64rem;font-weight:600;padding:4px 10px;border-radius:20px;letter-spacing:.2px}
+.artcard .c{padding:13px 15px 15px}
+.artcard h3{font-size:.92rem;font-weight:600;line-height:1.35}
+.artcard .date{font-size:.7rem;color:var(--muted);margin-top:6px}
+.hscroll{display:flex;gap:12px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px}
+.hscroll::-webkit-scrollbar{height:0}
+.hscroll .artcard{flex:none;width:230px;margin-bottom:4px}
+
+/* product cards */
+.prod{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:13px}
+.prod .bk{width:64px;height:84px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:4px 4px 0 #e7d9e5}
+.prod.tpg .bk{background:linear-gradient(135deg,var(--plum),var(--plum2))}
+.prod.ui .bk{background:linear-gradient(135deg,var(--orange),var(--orange2))}
+.prod .bk svg{width:28px;height:28px}
+.prod .c{flex:1;min-width:0}
+.prod h3{font-size:.96rem;font-weight:600}
+.prod .pr{font-size:.8rem;font-weight:700;color:var(--orange2);margin:3px 0 6px}
+.prod p{font-size:.74rem;color:var(--muted);line-height:1.45;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;font-family:var(--sans);font-weight:600;font-size:.82rem;padding:10px 18px;border-radius:24px;cursor:pointer;text-decoration:none;box-shadow:0 6px 16px rgba(200,98,42,.25)}
+.btn.wide{width:100%}
+.btn svg{width:15px;height:15px}
+
+/* B2B card */
+.b2b{background:linear-gradient(140deg,var(--plum),var(--plum2));color:#fff;border-radius:20px;padding:20px;position:relative;overflow:hidden;margin-bottom:13px}
+.b2b .bfwm{position:absolute;right:-16px;bottom:-20px;width:110px;color:#fff;opacity:.1}
+.b2b h3{font-size:1.05rem;font-weight:600;position:relative}
+.b2b p{font-size:.8rem;color:rgba(255,255,255,.82);line-height:1.5;margin:8px 0 14px;font-weight:300;position:relative}
+
+/* categorie grid */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.catbtn{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 13px;cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:500;color:var(--ink);text-align:left;display:flex;align-items:center;gap:9px;transition:background .15s;text-decoration:none}
+.catbtn:hover{background:var(--soft)}
+.catbtn .d{width:7px;height:7px;border-radius:50%;background:var(--orange);flex:none}
+.searchbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 15px;margin-bottom:14px;color:var(--muted)}
+.searchbar svg{width:18px;height:18px;flex:none}.searchbar span{font-size:.85rem}
+
+.trust{display:flex;gap:9px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.76rem;color:#5f5360;line-height:1.4;margin-top:6px;cursor:pointer;text-decoration:none}
+.trust svg{width:20px;height:20px;color:var(--plum2);flex:none}
+.foot{text-align:center;font-size:.68rem;color:#a99ca6;margin-top:22px;line-height:1.5}
+
+/* MENU overlay */
+.ov{position:absolute;inset:0;z-index:90;display:none}
+.ov.on{display:block}
+.ov .bgd{position:absolute;inset:0;background:rgba(30,10,28,.45);animation:fade .2s}
+.ov .panel{position:absolute;top:0;right:0;bottom:0;width:80%;max-width:300px;background:var(--cream);box-shadow:-10px 0 40px rgba(0,0,0,.2);overflow-y:auto;animation:slidein .26s ease;display:flex;flex-direction:column}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.ov .mh{background:linear-gradient(135deg,var(--plum),var(--plum2));color:#fff;padding:18px 18px 16px;display:flex;align-items:center;gap:11px}
+.ov .mh .bf{width:30px;color:#fff}
+.ov .mh h2{font-size:1rem;font-weight:600}
+.ov .mh .x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem}
+.ov .ml{padding:8px 0}
+.mitem{display:flex;align-items:center;gap:13px;padding:13px 18px;cursor:pointer;width:100%;background:none;border:none;font-family:var(--sans);font-size:.92rem;font-weight:500;color:var(--ink);text-align:left}
+.mitem:hover{background:var(--soft)}
+.mitem .ic{width:34px;height:34px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--plum);flex:none}
+.mitem .ic svg{width:18px;height:18px}
+
+.nav{flex:none;display:flex;background:#fff;border-top:1px solid var(--line);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:40}
+.nav-item{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;color:#b3a6b1;font-family:var(--sans);font-size:.64rem;font-weight:600}
+.nav-item svg{width:22px;height:22px}
+.nav-item.act{color:var(--plum)}
+.nav-item.act .nic{background:var(--soft)}
+.nic{width:44px;height:27px;border-radius:14px;display:flex;align-items:center;justify-content:center;transition:background .15s}
+
+/* in-app calculator */
+.cc-step{margin-bottom:16px}
+.cc-lbl{display:flex;align-items:center;gap:8px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--plum2);margin:2px 2px 10px}
+.cc-lbl .num{width:18px;height:18px;border-radius:50%;background:var(--plum);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.62rem}
+.cc-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.cc-opt{background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:13px 6px;cursor:pointer;text-align:center;transition:all .15s;font-family:var(--sans)}
+.cc-opt.act{border-color:var(--orange);background:#fff8f3;box-shadow:0 4px 14px rgba(232,131,74,.14)}
+.cc-opt .ic{font-size:1.35rem;line-height:1}
+.cc-opt .nm{font-size:.75rem;font-weight:600;margin-top:5px;color:var(--ink)}
+.cc-sel{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;font-family:var(--sans);font-size:.9rem;font-weight:500;color:var(--ink)}
+.cc-slid{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.cc-slid .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:.8rem;color:var(--muted);font-weight:500}
+.cc-slid .v{background:#fff3ec;color:var(--orange2);font-weight:700;font-size:.95rem;padding:4px 14px;border-radius:10px}
+.cc-slid input{width:100%;-webkit-appearance:none;height:6px;border-radius:5px;background:var(--cream2);outline:none}
+.cc-slid input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--orange);cursor:pointer;box-shadow:0 2px 8px rgba(200,98,42,.4)}
+.cc-slid input::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:var(--orange);cursor:pointer}
+.cc-total{background:linear-gradient(140deg,var(--plum),var(--plum2));color:#fff;border-radius:20px;padding:20px;margin:6px 0 14px}
+.cc-total .l{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.cc-total .big{font-size:2.4rem;font-weight:700;color:var(--orange);margin:5px 0 4px;letter-spacing:-1px}
+.cc-total .s{font-size:.82rem;color:rgba(255,255,255,.85);font-weight:300}
+.cc-dgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.cc-db{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px 14px}
+.cc-db .l{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--plum2)}
+.cc-db .v{font-size:1.25rem;font-weight:700;margin:3px 0}
+.cc-db .s{font-size:.64rem;color:var(--muted);line-height:1.3}
+.cc-verd{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 16px 10px}
+.cc-vt{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plum2);padding:12px 0 4px}
+.cc-rij{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.cc-rij:last-child{border-bottom:none}
+.cc-rij .n{font-size:.84rem;font-weight:500}
+.cc-rij .n .tag{background:#fbe7da;color:var(--orange2);font-size:.56rem;font-weight:700;padding:2px 6px;border-radius:6px;margin-left:6px;vertical-align:middle}
+.cc-rij .w{font-size:.86rem;font-weight:700;white-space:nowrap}
+.cc-rij.tot{border-top:2px solid var(--plum);margin-top:2px;padding-top:13px}
+.cc-rij.tot .n{font-weight:700;color:var(--plum)}
+.cc-rij.tot .w{color:var(--orange2);font-size:1.05rem}
+
+#scr-tool{flex-direction:column; overflow:hidden}
+#scr-tool.on{display:flex}
+.toolwrap{flex:1; min-height:0; background:#fff}
+.toolwrap iframe{width:100%; height:100%; border:0; display:block}
+
+@media (max-width:460px){
+  body{padding:0;background:var(--cream)}
+  .cap{display:none}
+  .phone{width:100%;height:100%;border-radius:0;padding:0;box-shadow:none}
+  .screen{border-radius:0}
+  .island{display:none}
+  .status{height:env(safe-area-inset-top,18px);padding-bottom:0}
+}
+</style>
+</head>
+<body>
+<div class="cap">
+  <span class="pill">UITVAART-PLATFORM · APP VERSIE 1</span>
+  <p>De complete app · <b>alle tools, kennis en de gids</b> bij de hand</p>
+</div>
+
+<div class="phone">
+  <div class="island"></div>
+  <div class="screen">
+    <div class="status"><span id="clock">9:41</span><span class="r">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 17h2v3H2zm4-3h2v6H6zm4-4h2v10h-2zm4-3h2v13h-2zm4-3h2v16h-2z"/></svg>
+      <svg viewBox="0 0 26 24" fill="currentColor"><rect x="1" y="7" width="20" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="9" width="15" height="7" rx="1.5"/><rect x="22" y="10" width="2.5" height="5" rx="1"/></svg>
+    </span></div>
+
+    <div class="body" id="bodyArea">
+      <section class="scr on" id="scr-home"></section>
+      <section class="scr" id="scr-hub"></section>
+      <section class="scr" id="scr-gids"></section>
+      <section class="scr" id="scr-artikelen"></section>
+      <section class="scr" id="scr-uitgaves"></section>
+      <section class="scr" id="scr-calc"></section>
+      <section class="scr" id="scr-tool"></section>
+
+      <div class="ov" id="ov">
+        <div class="bgd" onclick="closeMenu()"></div>
+        <div class="panel">
+          <div class="mh"><span class="bf" id="menu-bf"></span><h2>Menu</h2><button class="x" onclick="closeMenu()">✕</button></div>
+          <div class="ml" id="menu-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="nav-item act" data-tab="home" onclick="goHome()"><span class="nic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11 12 4l8 7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9h12v-9"/></svg></span>Start</button>
+      <button class="nav-item" data-tab="regelen" onclick="openHub('regelen','tab')"><span class="nic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 8.5l1.3 1.3L13 7m-4 6 1.3 1.3L13 11.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Regelen</button>
+      <button class="nav-item" data-tab="tools" onclick="openHub('tools','tab')"><span class="nic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2" stroke-linecap="round"/></svg></span>Tools</button>
+      <button class="nav-item" data-tab="kennis" onclick="openHub('kennis','tab')"><span class="nic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/></svg></span>Kennis</button>
+      <button class="nav-item" data-tab="gids" onclick="openGids('tab')"><span class="nic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6-5-6-10a6 6 0 0 1 12 0c0 5-6 10-6 10z" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.2"/></svg></span>Gids</button>
+    </nav>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var SITE='https://uitvaart-platform.nl';
+var TB='https://uitvaartplatform.github.io/uitvaart-tools/';
+var BFLY='<svg viewBox="0 0 40 35" fill="none" xmlns="http://www.w3.org/2000/svg">'
++'<path fill="currentColor" opacity=".45" d="M13.22 3.78s-3.4.78-2.83-2.42c0 0 1-3.06 4.32 0 3.33 3.06 4.39 10.88 4.39 10.88s-2.4-7.82-5.88-8.46Z"/>'
++'<path fill="currentColor" d="M17.9 22.62c-3.47-7.11-7.01-7.75-9.13-11.24C6.64 7.9 6.93 6.7 7.35 5.84c.36-.71 1.94-.63 2.58-.42l.02-.01A9.62 9.62 0 0 0 2.9 3.78c-4.67.7-2.33 6.11-2.12 6.47.21.35 1.13 2.77 4.88 5.97a110.6 110.6 0 0 1 6.73 6.25s3.96 3.27 4.24 7.26c0 0 0 2.63-.85 3.34 0 0 5.6-3.34 2.12-10.45Z"/>'
++'<path fill="currentColor" opacity=".45" d="M5.58 16.15s-4.17 4.9-3.68 9.74c.5 4.83 3.47 6.9 3.47 6.9s.85.85 2.62 1.49 2.55 1.06 5.59.35c0 0 1.63-.64 2.2-1.56 0 0-1.35 2.06-5.1-.29-3.75-2.34-1.91-8.39-1.91-8.39s.42-1.99 1.9-3.62l-5.09-4.62ZM26.5 3.78s3.4.78 2.83-2.42c0 0-1-3.06-4.32 0-3.33 3.06-4.39 10.88-4.39 10.88s2.4-7.82 5.87-8.46Z"/>'
++'<path fill="currentColor" d="M21.82 22.62c3.47-7.11 7.01-7.75 9.13-11.24 2.13-3.48 1.84-4.69 1.42-5.54-.36-.71-1.94-.63-2.58-.42l-.02-.01a9.62 9.62 0 0 1 7.06-1.63c4.67.7 2.33 6.11 2.12 6.47-.21.35-1.13 2.77-4.88 5.97-3.75 3.2-6.73 6.25-6.73 6.25s-3.96 3.27-4.24 7.26c0 0 0 2.63.85 3.34 0 0-5.6-3.34-2.13-10.45Z"/>'
++'<path fill="currentColor" opacity=".45" d="M34.14 16.15s4.17 4.9 3.68 9.74c-.5 4.83-3.47 6.9-3.47 6.9s-.85.85-2.62 1.49-2.55 1.06-5.59.35c0 0-1.63-.64-2.2-1.56 0 0 1.35 2.06 5.1-.29 3.75-2.34 1.91-8.39 1.91-8.39s-.42-1.99-1.9-3.62l5.09-4.62Z"/>'
++'</svg>';
+
+// ICONS
+var I={
+ regelen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 8.5l1.3 1.3L13 7m-4 6 1.3 1.3L13 11.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ tools:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2" stroke-linecap="round"/></svg>',
+ kennis:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/></svg>',
+ gids:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-6-5-6-10a6 6 0 0 1 12 0c0 5-6 10-6 10z" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.2"/></svg>',
+ rouw:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20s-7-4.3-7-9.5A3.6 3.6 0 0 1 12 8a3.6 3.6 0 0 1 7 2.5c0 5.2-7 9.5-7 9.5z" stroke-linejoin="round"/></svg>',
+ erf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M5 7h14M7 7l-3 6h6zm10 0-3 6h6z" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ agenda:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 9h16M8 3v4m8-4v4" stroke-linecap="round"/></svg>',
+ uitgaves:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v18H6.5A1.5 1.5 0 0 1 5 19.5z"/><path d="M9 7h6M9 11h6" stroke-linecap="round"/></svg>',
+ b2b:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7" stroke-linecap="round"/></svg>',
+ over:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01" stroke-linecap="round"/></svg>',
+ ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4h6v6M20 4l-9 9M10 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v18H6.5A1.5 1.5 0 0 1 5 19.5z"/></svg>',
+ cite:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13" stroke-linejoin="round"/><path d="M9 13l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// SECTIE-DATA (alle items linken naar het eigen platform)
+function u(p){ return p.indexOf('http')===0 ? p : SITE+p; }
+var SECTIONS={
+ regelen:{title:'Uitvaart regelen', icon:'regelen', sub:'Stap voor stap, op je eigen tempo.', intro:'Alles om een uitvaart te regelen, van stappenplan tot kosten en verzekering.', items:[
+   {l:'Compleet stappenplan', s:'Wat regelen na een overlijden', p:'/wat-regelen-na-overlijden-compleet-stappenplan'},
+   {l:'Stappenplan per situatie', s:'Toegespitst op jouw situatie', p:'/uitvaart-stappenplan-categorie'},
+   {l:'Uitvaartvormen', s:'Cremeren, begraven, natuur en meer', p:'/uitvaartvormen'},
+   {l:'Uitvaart keuzehulp', s:'Ontdek wat bij je past', p:'/uitvaart-keuzehulp'},
+   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', p:'/uitvaart-matchmaker'},
+   {l:'Uitvaartkosten', s:'Wat kost een uitvaart', p:'/uitvaartkosten'},
+   {l:'Kostenvergelijker', s:'Vergelijk per regio', p:'/uitvaart-kostenvergelijker'},
+   {l:'Wat kost wat bij een uitvaart', s:'Alle posten uitgelegd', p:'/wat-kost-wat-bij-een-uitvaart'},
+   {l:'Uitvaartverzekeringen', s:'Vergelijk de dekkingen', p:'/uitvaartverzekering'}
+ ]},
+ tools:{title:'Tools en hulpmiddelen', icon:'tools', sub:'Reken en kies, gratis en privacyvriendelijk.', intro:'De volledige tools werken hier in de app. Er wordt niets opgeslagen.', items:[
+   {l:'Uitvaartkosten calculator PRO+', s:'Schat de kosten in 25 regio\u0027s', tool:TB+'uitvaartkosten-calculator.html'},
+   {l:'Erfbelasting calculator', s:'Bereken de erfbelasting 2026', tool:TB+'erfbelasting-calculator-pro.html'},
+   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
+   {l:'Erfenis aanvaarden keuzehulp', s:'Aanvaarden, beneficiair of verwerpen', tool:TB+'beneficiair-aanvaarden-tool.html'},
+   {l:'Nabestaanden geldwijzer', s:'Je inkomen na een overlijden', tool:TB+'nabestaanden-financieel-cockpit-pro.html'},
+   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', tool:TB+'uitvaartmatcher.html'},
+   {l:'Interactieve rouwpagina', s:'Houd bij hoe het met je gaat', tool:TB+'Rouwpagina.html'}
+ ]},
+ kennis:{title:'Kennisbank', icon:'kennis', sub:'Antwoord op elke vraag rond afscheid.', intro:'Een van de grootste kennisbanken van de branche, altijd actueel.', items:[
+   {l:'Veelgestelde vragen', s:'Honderden vragen beantwoord', p:'/veelgestelde-vragen'},
+   {l:'Woordenlijst A-Z', s:'Alle begrippen uitgelegd', p:'/woordenlijst'},
+   {l:'Statistieken 2026', s:'Cijfers over uitvaart in Nederland', p:'/uitvaart-statistieken-nederland'},
+   {l:'Wetgeving', s:'De regels rond overlijden', p:'/uitvaartwetgeving'},
+   {l:'Religie en cultuur', s:'Gebruiken per geloof en cultuur', p:'/uitvaart-per-religie-en-cultuur'},
+   {l:'Uitvaart per plaats', s:'Informatie in jouw regio', p:'/uitvaart-per-plaats'},
+   {l:'Begraafplaatsen Nederland', s:'Vind een begraafplaats', p:'/begraafplaatsen-nederland'},
+   {l:'Rouw atlas wereldwijd', s:'Rouwgebruiken over de wereld', p:'/rouw-atlas'},
+   {l:'Bekende Nederlanders', s:'Rustplaatsen van bekenden', p:'/bekende-nederlanders-rustplaats'},
+   {l:'Alle artikelen', s:'Nieuws en tips, dagelijks bijgewerkt', screen:'artikelen'}
+ ]},
+ rouw:{title:'Rouw en steun', icon:'rouw', sub:'Je hoeft het niet alleen te dragen.', intro:'Rust en steun rond verlies, in je eigen tempo.', items:[
+   {l:'Rouwverwerking', s:'Omgaan met verlies', p:'/rouwverwerking'},
+   {l:'Interactieve rouwpagina', s:'Houd bij hoe het met je gaat', p:'/rouw'},
+   {l:'Rouwverwerking per doelgroep', s:'Voor kinderen, jongeren en meer', p:'/rouw-per-doelgroep'},
+   {l:'Kosten van rouw', s:'De minder zichtbare kant', p:'/kosten-van-rouw'},
+   {l:'Rouw atlas wereldwijd', s:'Rouwgebruiken over de wereld', p:'/rouw-atlas'},
+   {l:'Palliatieve zorg en hospice', s:'Zorg in de laatste fase', p:'/palliatieve-zorg'}
+ ]},
+ erf:{title:'Nalatenschap en erfrecht', icon:'erf', sub:'Erfenis, testament en de financiele kant.', intro:'Begrijp je rechten en plichten rond de nalatenschap.', items:[
+   {l:'Nalatenschap en erfrecht', s:'De basis uitgelegd', p:'/nalatenschap-erfrecht'},
+   {l:'Erfenis en testament', s:'Wat regelt een testament', p:'/erfenis-en-testament'},
+   {l:'Erfrecht wereldwijd', s:'Erfrecht over de grens', p:'/atlas-erfrecht-wereldwijd'},
+   {l:'Nabestaanden financieel', s:'Inkomen en regelingen', p:'/nabestaanden-financieel'},
+   {l:'Digitale nalatenschap', s:'Accounts en wachtwoorden', p:'/digitale-nalatenschap'},
+   {l:'Wat als scenario\u0027s', s:'Doordenk je situatie', p:'/wat-als-scenarios'},
+   {l:'Erfbelasting calculator', s:'Bereken de erfbelasting', tool:TB+'erfbelasting-calculator-pro.html'},
+   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
+   {l:'Erfenis aanvaarden keuzehulp', s:'Maak een onderbouwde keuze', tool:TB+'beneficiair-aanvaarden-tool.html'}
+ ]},
+ agenda:{title:'Agenda', icon:'agenda', sub:'Bijeenkomsten en evenementen.', intro:'Wat er speelt rond afscheid en rouw.', items:[
+   {l:'Alle evenementen', s:'Bekijk de agenda', p:'/evenementen'}
+ ]},
+ b2b:{title:'Voor professionals', icon:'b2b', sub:'Word zichtbaar bij een groot publiek.', intro:'Sluit je aan bij het grootste uitvaartplatform van Nederland.', cta:true, items:[
+   {l:'Zakelijke bedrijvengids', s:'Jouw organisatie in de app', p:'/b2b/bedrijvengids'},
+   {l:'B2B netwerkplatform', s:'Het zakelijke netwerk', p:'/b2b-netwerkplatform'},
+   {l:'Uitvaartgids voor professionals', s:'Voor de vakgenoot', p:'/uitvaartgids-voor-professionals'},
+   {l:'Zakelijke diensten', s:'Foto, film, marketing en meer', p:'/zakelijke-diensten'},
+   {l:'Adverteren', s:'Mogelijkheden en tarieven', p:'/adverteren'}
+ ]},
+ over:{title:'Over ons', icon:'over', sub:'Onafhankelijk, betrouwbaar en herkend.', intro:'', items:[
+   {l:'Wie zijn wij', s:'Ons verhaal', p:'/wie-zijn-wij'},
+   {l:'Ons team', s:'De mensen erachter', p:'/over-ons'},
+   {l:'Rondleiding', s:'Ontdek het platform', p:'/welkom-op-uitvaart-platformnl'},
+   {l:'Geciteerd door de overheid', s:'Onze autoriteit', p:'/geciteerd-door-overheid'},
+   {l:'Contact', s:'Neem contact op', p:'/contact'},
+   {l:'Redactioneel beleid', s:'Hoe wij werken', p:'/redactioneel-beleid'},
+   {l:'Privacy en cookies', s:'Jouw privacy', p:'/privacy-en-cookieverklaring'},
+   {l:'Algemene voorwaarden', s:'', p:'/algemene-voorwaarden'}
+ ]}
+};
+
+// Bedrijvengids categorieen (echte URL\u0027s /bedrijven/c/<slug>)
+var POP=[['Uitvaartondernemingen','uitvaartondernemingen'],['Rouwbegeleiding en nazorg','rouwbegeleiding-en-nazorg'],['Bloemen','bloemen'],['Fotograaf','fotograaf'],['Rouwvervoer','rouwvervoer'],['Kisten en manden','kisten-manden']];
+var CATS=[['Afscheidskunst','afscheidskunst'],['Asverstrooiing','asverstrooiing'],['Begraafplaats en crematorium','begraafplaats-crematorium'],['Bereikbaarheidsdiensten','bereikbaarheidsdiensten'],['Beveiliging','beveiliging'],['Bloemen','bloemen'],['Boedelruiming en ontruiming','boedelruiming-ontruiming'],['Brancheverenigingen','brancheverenigingen'],['Catering','catering'],['Dierenuitvaarten','dierenuitvaarten'],['Dragers','dragers'],['Erfrecht','erfrecht'],['Familiemediation','familiemediation'],['Fotograaf','fotograaf'],['Geurbeleving','geurbeleving'],['Goede doelen','goede-doelen'],['Graf en gedenktekens','graf-gedenktekens'],['Grafzorg','grafzorg'],['Herinneringsproducten','herinneringsproducten'],['Herinneringssieraden','herinneringssieraden'],['Juridisch advies','juridisch-advies'],['Keurmerken','keurmerken'],['Kinderuitvaarten','kinderuitvaarten'],['Kisten en manden','kisten-manden'],['Kleding','kleding'],['Livestreaming','livestreaming'],['Locatie','locatie'],['Makelaar','makelaar'],['Media','media'],['Muziek','muziek'],['Nalatenschap','nalatenschap'],['Opbaren en verzorging','opbaren-verzorging'],['Opleidingen','opleidingen'],['Reiniging','reiniging'],['Repatriering','repatriering'],['Resomeren','resomeren'],['Rituelen en tradities','rituelen-tradities'],['Rouwbegeleiding en nazorg','rouwbegeleiding-en-nazorg'],['Rouwcentra','rouwcentra'],['Rouwdrukwerk','rouwdrukwerk'],['Rouwvervoer','rouwvervoer'],['Software en administratie','software-administratie'],['Sprekers en schrijvers','sprekers-schrijvers'],['Stervensbegeleiding','stervensbegeleiding'],['Stichtingen','stichtingen'],['Styling en decoratie','styling-en-decoratie'],['Theater voorstelling','theater-voorstelling'],['Uitvaartbegeleiding','uitvaartbegeleiding'],['Uitvaartbenodigdheden','uitvaartbenodigdheden'],['Uitvaartondernemingen','uitvaartondernemingen'],['Uitvaarttips','uitvaarttips'],['Uitvaartverzekeringen','uitvaartverzekeringen'],['Unieke uitvaartlocaties','unieke-uitvaartlocaties'],['Urnen','urnen'],['Vervoer en logistiek','vervoer-en-logistiek'],['Videograaf','videograaf'],['Wade','wade'],['Zorginstellingen','zorginstellingen']];
+
+// Nieuwste artikelen
+var IMG='https://app.uitvaart-platform.nl/_images/';
+var ARTS=[
+ {t:'Overlijden in Belgie: wat moet je regelen als Nederlander?',c:'Repatriering',d:'29 mei 2026',s:'/artikelen/overlijden-in-belgie-wat-moet-je-regelen-als-nederlander',i:IMG+'20960/pexels-efrem-efre-2786187-13163692.jpg?w=600&fm=jpeg'},
+ {t:'PostNL verhoogt prijs: rouwzegel stijgt naar 3,25 euro',c:'Rouwdrukwerk',d:'28 mei 2026',s:'/artikelen/postnl-verhoogt-prijs-rouwzegel-stijgt-naar-3-25-euro',i:IMG+'21177/pexels-jan-van-der-wolf-11680885-14886806.jpg?w=600&fm=jpeg'},
+ {t:'Levend begraven worden: hoe vaak komt het echt voor?',c:'Rouwvervoer',d:'27 mei 2026',s:'/artikelen/levend-begraven-worden-hoe-vaak-komt-het-echt-voor',i:IMG+'20958/pexels-ivan-s-8963850.jpg?w=600&fm=jpeg'},
+ {t:'Gecondoleerd zeggen in verschillende talen',c:'Afscheidskunst',d:'22 mei 2026',s:'/artikelen/gecondoleerd-zeggen-in-verschillende-talen-een-gids-voor-internationaal-medeleven',i:IMG+'20850/pexels-thirdman-7659454.jpg?w=600&fm=jpeg'},
+ {t:'Hoeveel mensen overlijden in Nederland door overgewicht?',c:'Locatie',d:'20 mei 2026',s:'/artikelen/hoeveel-mensen-overlijden-in-nederland-door-overgewicht',i:IMG+'20848/pexels-shvets-production-6975474.jpg?w=600&fm=jpeg'},
+ {t:'Uitvaart-Platform.nl lanceert een van de grootste kennisbanken',c:'Media',d:'20 mei 2026',s:'/artikelen/uitvaart-platformnl-lanceert-een-van-de-grootste-kennisbanken-binnen-de-uitvaartbranche',i:IMG+'20877/WhatsApp-Image-2026-05-20-at-10.32.38.jpeg?w=600&fm=jpeg'}
+];
+
+// Artikelcategorieen (filteren de artikelenpagina via ?category=<id>)
+var ARTCATS=[['Afscheidskunst',1],['Asverstrooiing',14],['Begraafplaats en crematorium',19],['Bereikbaarheidsdiensten',262],['Beveiliging',253],['Bloemen',25],['Boedelruiming en ontruiming',30],['Brancheverenigingen',259],['Catering',34],['Dierenuitvaarten',38],['Dragers',43],['Erfrecht',47],['Familiemediation',291],['Fotograaf',60],['Geurbeleving',256],['Goede doelen',72],['Graf en gedenktekens',63],['Grafzorg',68],['Herinneringsproducten',73],['Herinneringssieraden',9],['Juridisch advies',78],['Keurmerken',258],['Kinderuitvaarten',83],['Kisten en manden',91],['Kleding',108],['Livestreaming',120],['Locatie',112],['Makelaar',122],['Media',126],['Muziek',132],['Nalatenschap',95],['Opbaren en verzorgen',143],['Opleidingen',149],['Reiniging',152],['Repatriering',293],['Resomeren',155],['Rituelen en tradities',275],['Rouwbegeleiding en nazorg',156],['Rouwcentra',162],['Rouwdrukwerk',167],['Rouwvervoer',172],['Software en administratie',182],['Sprekers en schrijvers',188],['Stervensbegeleiding',192],['Stichtingen',257],['Styling en decoratie',198],['Theater voorstelling',288],['Uitvaartbegeleiding',285],['Uitvaartbenodigdheden',290],['Uitvaartondernemingen',202],['Uitvaarttips',273],['Uitvaartverzekeringen',216],['Unieke uitvaartlocaties',210],['Urnen',219],['Vervoer en logistiek',227],['Videograaf',231],['Wade',235],['Zorginstellingen',239]];
+
+// menu structuur
+var MENU=[['home','Start','over'],['regelen','Uitvaart regelen','regelen'],['tools','Tools en hulpmiddelen','tools'],['kennis','Kennisbank','kennis'],['artikelen','Artikelen','book'],['gids','Bedrijvengids','gids'],['rouw','Rouw en steun','rouw'],['erf','Nalatenschap en erfrecht','erf'],['agenda','Agenda','agenda'],['uitgaves','Onze uitgaves','uitgaves'],['b2b','Voor professionals','b2b'],['over','Over ons','over']];
+
+// ===== HELPERS =====
+function esc(s){return s;}
+function rowHtml(it){
+  var onclick, right;
+  if(it.tool){ onclick="openTool('"+it.tool+"','"+it.l.replace(/'/g,'')+"')"; right=I.tools; }
+  else if(it.screen){ onclick="openScreen('"+it.screen+"')"; right=''; }
+  else { onclick="openExt('"+u(it.p)+"')"; right=I.ext; }
+  return '<button class="row" onclick="'+onclick+'"><span class="ic">'+(I[it.ic]||I.book)+'</span><span class="tx"><h3>'+it.l+'</h3>'+(it.s?'<p>'+it.s+'</p>':'')+'</span><span class="ext">'+right+'</span></button>';
+}
+window.openExt=function(url){ window.open(url,'_blank','noopener'); };
+window.openTool=function(url,title){
+  var back='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var h='<div class="hd simple"><button class="back" onclick="openHub(\'tools\',\'tab\')">'+back+'</button><div><h1>'+title+'</h1><div class="sub">Volledige tool, in de app</div></div></div>';
+  h+='<div class="toolwrap"><iframe src="'+url+'" title="'+title+'" loading="lazy" referrerpolicy="no-referrer"></iframe></div>';
+  document.getElementById('scr-tool').innerHTML=h;
+  showScr('tool','tools');
+};
+
+// ===== HOME =====
+function renderHome(){
+  var h='';
+  h+='<div class="hd"><div class="hrow"><span class="bf">'+BFLY+'</span><div><h1>Uitvaart-Platform</h1><div class="sub">Alles rond afscheid, rouw en nalatenschap</div></div><button class="menu" onclick="openMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button></div></div>';
+  h+='<div class="pad">';
+  h+='<div class="sect-t">Waar kunnen we mee helpen</div>';
+  h+='<div class="grid2">';
+  [['regelen','Uitvaart regelen','Stappenplan en kosten'],['tools','Tools','Reken en kies'],['kennis','Kennisbank','500+ vragen'],['gids','Bedrijvengids','Vind een specialist'],['rouw','Rouw en steun','Ook voor kinderen'],['erf','Nalatenschap','Erfrecht en erfenis']].forEach(function(t){
+    var on = (t[0]==='gids')?"openGids()":"openHub('"+t[0]+"')";
+    h+='<button class="tile" onclick="'+on+'"><span class="ic">'+I[t[0]]+'</span><h3>'+t[1]+'</h3><p>'+t[2]+'</p></button>';
+  });
+  h+='</div>';
+  // artikelen
+  h+='<div class="sect-t">Artikelen</div>';
+  h+='<button class="row" onclick="openScreen(\'artikelen\')"><span class="ic">'+I.book+'</span><span class="tx"><h3>Nieuwste artikelen</h3><p>Dagelijks bijgewerkt, rechtstreeks van het platform</p></span><span class="ext">'+I.ext+'</span></button>';
+  // uitgaves
+  h+='<div class="sect-t">Onze uitgaves</div>';
+  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Leg samen alles vast voor je nabestaanden, een tastbaar naslagwerk.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
+  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid, met verhalen, inspiratie en achtergrond.','https://uitvaart-inside.nl/bestellen','Bestel het magazine');
+  // b2b
+  h+='<div class="sect-t">Voor ondernemers</div>';
+  h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Zet jouw organisatie in de app</h3><p>Word zichtbaar bij duizenden nabestaanden die op zoek zijn naar de juiste specialist.</p><button class="btn" onclick="openHub(\'b2b\')">Meer weten</button></div>';
+  // trust
+  h+='<a class="trust" onclick="openExt(\''+u('/geciteerd-door-overheid')+'\')">'+I.cite+'<span>Onafhankelijk en betrouwbaar, geciteerd door de overheid.</span></a>';
+  h+='<div class="foot">Uitvaart-Platform.nl · De Nieuwe Erven 3, Cuijk<br>Informatie en gids openen op het platform</div>';
+  h+='</div>';
+  document.getElementById('scr-home').innerHTML=h;
+}
+function artCard(a){
+  return '<a class="artcard" onclick="openExt(\''+u(a.s)+'\')"><div class="img" style="background-image:url(\''+a.i+'\')"><span class="cat">'+a.c+'</span></div><div class="c"><h3>'+a.t+'</h3><div class="date">'+a.d+'</div></div></a>';
+}
+function prodCard(cls,title,kind,desc,url,btn){
+  return '<div class="prod '+cls+'"><div class="bk">'+I.book+'</div><div class="c"><h3>'+title+'</h3><div class="pr">'+kind+'</div><p>'+desc+'</p><a class="btn" href="'+url+'" target="_blank" rel="noopener">'+I.ext+' '+btn+'</a></div></div>';
+}
+
+// ===== HUB =====
+function renderHub(key){
+  var sec=SECTIONS[key]; if(!sec)return;
+  var h='<div class="hd simple"><button class="back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><h1>'+sec.title+'</h1><div class="sub">'+sec.sub+'</div></div></div>';
+  h+='<div class="pad">';
+  if(sec.intro) h+='<p class="intro">'+sec.intro+'</p>';
+  if(sec.cta){
+    h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Jouw organisatie in de app</h3><p>Bereik nabestaanden op het moment dat zij een specialist zoeken. Meld je aan en word zichtbaar.</p><a class="btn" href="'+u('/account')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
+  }
+  sec.items.forEach(function(it){ it.ic=sec.icon; h+=rowHtml(it); });
+  h+='</div>';
+  document.getElementById('scr-hub').innerHTML=h;
+}
+
+// ===== GIDS =====
+function renderGids(){
+  var h='<div class="hd"><div class="hrow"><span class="bf">'+BFLY+'</span><div><h1>Bedrijvengids</h1><div class="sub">De juiste specialist bij jou in de buurt</div></div></div></div>';
+  h+='<div class="pad">';
+  h+='<div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg><span>Zoek een categorie of specialist</span></div>';
+  h+='<div class="sect-t">Populair</div><div class="cats">';
+  POP.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/c/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  h+='</div>';
+  h+='<div class="sect-t">Alle categorieen</div><div class="cats">';
+  CATS.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/c/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  h+='</div>';
+  h+='<div class="b2b" style="margin-top:18px"><span class="bfwm">'+BFLY+'</span><h3>Hier ook vindbaar zijn?</h3><p>Zet jouw organisatie in de gids en word gevonden door nabestaanden.</p><a class="btn" href="'+u('/account')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
+  h+='</div>';
+  document.getElementById('scr-gids').innerHTML=h;
+}
+
+// ===== ARTIKELEN =====
+function renderArtikelen(){
+  var h='<div class="hd simple"><button class="back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><h1>Artikelen</h1><div class="sub">Nieuws en tips, dagelijks bijgewerkt</div></div></div>';
+  h+='<div class="pad">';
+  h+='<p class="intro">De nieuwste artikelen staan altijd actueel op het platform en worden elke dag bijgewerkt.</p>';
+  h+='<a class="btn wide" href="'+u('/artikelen')+'" target="_blank" rel="noopener">'+I.ext+' Bekijk de nieuwste artikelen</a>';
+  h+='<div class="sect-t">Categorieen</div>';
+  h+='<div class="cats">';
+  ARTCATS.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/artikelen?category='+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  h+='</div>';
+  h+='</div>';
+  document.getElementById('scr-artikelen').innerHTML=h;
+}
+
+// ===== UITGAVES =====
+function renderUitgaves(){
+  var h='<div class="hd simple"><button class="back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><h1>Onze uitgaves</h1><div class="sub">Tastbaar om te bewaren en door te geven</div></div></div>';
+  h+='<div class="pad">';
+  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Een tastbaar dossier om al je wensen en gegevens samen vast te leggen voor je nabestaanden.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
+  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid en rouw, met verhalen, inspiratie en achtergrond uit de branche.','https://uitvaart-inside.nl/bestellen','Bestel het magazine');
+  h+='<button class="row" onclick="openExt(\''+u('/onze-producten')+'\')"><span class="ic">'+I.uitgaves+'</span><span class="tx"><h3>Het verhaal achter onze uitgaves</h3><p>Hoe en waarom we ze maken</p></span><span class="ext">'+I.ext+'</span></button>';
+  h+='</div>';
+  document.getElementById('scr-uitgaves').innerHTML=h;
+}
+
+// ===== MENU =====
+function renderMenu(){
+  document.getElementById('menu-bf').innerHTML=BFLY;
+  var h='';
+  MENU.forEach(function(m){
+    var act;
+    if(m[0]==='home') act="goHome()";
+    else if(m[0]==='gids') act="openGids()";
+    else if(m[0]==='artikelen'||m[0]==='uitgaves') act="openScreen('"+m[0]+"')";
+    else act="openHub('"+m[0]+"')";
+    h+='<button class="mitem" onclick="closeMenu();'+act+'"><span class="ic">'+(I[m[2]]||I.over)+'</span>'+m[1]+'</button>';
+  });
+  document.getElementById('menu-list').innerHTML=h;
+}
+window.openMenu=function(){ document.getElementById('ov').classList.add('on'); };
+window.closeMenu=function(){ document.getElementById('ov').classList.remove('on'); };
+
+// ===== ROUTER =====
+function showScr(id, tab){
+  ['home','hub','gids','artikelen','uitgaves','calc','tool'].forEach(function(s){ document.getElementById('scr-'+s).classList.toggle('on', s===id); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('act', n.getAttribute('data-tab')===tab); });
+  var el=document.getElementById('scr-'+id); if(el) el.scrollTop=0;
+}
+window.goHome=function(){ showScr('home','home'); };
+window.openHub=function(key,mode){ renderHub(key); showScr('hub', mode==='tab'?key:tabFor(key)); };
+window.openGids=function(mode){ showScr('gids','gids'); };
+window.openScreen=function(id){ showScr(id, ''); };
+function tabFor(key){ return (['regelen','tools','kennis'].indexOf(key)>=0)?key:''; }
+
+// ===== IN-APP UITVAARTKOSTEN CALCULATOR (echte logica) =====
+var ccREG=[{id:'amsterdam',n:'Amsterdam',f:1.18},{id:'rotterdam',n:'Rotterdam',f:1.08},{id:'denhaag',n:'Den Haag',f:1.12},{id:'utrecht',n:'Utrecht',f:1.10},{id:'eindhoven',n:'Eindhoven',f:1.00},{id:'groningen',n:'Groningen',f:0.92},{id:'tilburg',n:'Tilburg',f:0.98},{id:'almere',n:'Almere',f:1.02},{id:'breda',n:'Breda',f:1.00},{id:'nijmegen',n:'Nijmegen',f:0.97},{id:'enschede',n:'Enschede',f:0.93},{id:'haarlem',n:'Haarlem',f:1.14},{id:'arnhem',n:'Arnhem',f:0.99},{id:'amersfoort',n:'Amersfoort',f:1.06},{id:'apeldoorn',n:'Apeldoorn',f:0.96},{id:'flevoland',n:'Flevoland',f:0.98},{id:'friesland',n:'Friesland',f:0.91},{id:'drenthe',n:'Drenthe',f:0.90},{id:'overijssel',n:'Overijssel',f:0.93},{id:'gelderland',n:'Gelderland',f:0.97},{id:'limburg',n:'Limburg',f:0.95},{id:'zeeland',n:'Zeeland',f:0.92},{id:'brabant',n:'Noord-Brabant',f:1.00},{id:'noord-holland',n:'Noord-Holland',f:1.10},{id:'zuid-holland',n:'Zuid-Holland',f:1.08}];
+var ccFIX={cremeren:{basis:{kist:900,locatie:800,eind:1200,sfeer:200,comm:300,ondernemer:1200},standaard:{kist:1500,locatie:1400,eind:1800,sfeer:450,comm:500,ondernemer:2000},uitgebreid:{kist:2500,locatie:2200,eind:2500,sfeer:1100,comm:800,ondernemer:2800}},begraven:{basis:{kist:1200,locatie:600,eind:3500,sfeer:200,comm:300,ondernemer:1300},standaard:{kist:1800,locatie:1100,eind:5000,sfeer:450,comm:500,ondernemer:1800},uitgebreid:{kist:3000,locatie:1800,eind:7000,sfeer:1100,comm:800,ondernemer:2200}},natuur:{basis:{kist:1100,locatie:400,eind:2300,sfeer:200,comm:300,ondernemer:1300},standaard:{kist:1500,locatie:600,eind:3800,sfeer:400,comm:500,ondernemer:1350},uitgebreid:{kist:2200,locatie:900,eind:4800,sfeer:800,comm:700,ondernemer:1500}}};
+var ccCAT={basis:12,standaard:18,uitgebreid:28};
+var ccEIND={cremeren:'Crematie',begraven:'Begraven incl. grafrechten',natuur:'Natuurgraf (eeuwig)'};
+var ccTN={cremeren:'crematie',begraven:'begrafenis',natuur:'natuurbegrafenis'};
+var ccNN={basis:'sobere',standaard:'standaard',uitgebreid:'uitgebreide'};
+var ccS={type:'cremeren',niveau:'standaard',regio:'eindhoven',gasten:75};
+function ccEuro(n){return '\u20ac'+Math.round(n).toLocaleString('nl-NL');}
+function ccGetR(id){for(var i=0;i<ccREG.length;i++)if(ccREG[i].id===id)return ccREG[i];return ccREG[4];}
+function ccUpdate(){
+  var fx=ccFIX[ccS.type][ccS.niveau], cpg=ccCAT[ccS.niveau], rf=ccGetR(ccS.regio).f;
+  var vast=(fx.kist+fx.locatie+fx.eind+fx.sfeer+fx.comm+fx.ondernemer)*rf;
+  var cater=cpg*ccS.gasten*rf, tot=vast+cater;
+  document.getElementById('cc-tot').textContent=ccEuro(tot);
+  document.getElementById('cc-sub').textContent=ccNN[ccS.niveau]+' '+ccTN[ccS.type]+' in '+ccGetR(ccS.regio).n;
+  document.getElementById('cc-vast').textContent=ccEuro(vast);
+  document.getElementById('cc-var').textContent=ccEuro(cater);
+  document.getElementById('cc-vsub').textContent=ccEuro(cpg)+' per gast \u00d7 '+ccS.gasten+' gasten';
+  document.getElementById('cc-laag').textContent=ccEuro(tot*0.75);
+  document.getElementById('cc-hoog').textContent=ccEuro(tot*1.4);
+  var v=[['Kist en vervoer',fx.kist*rf,0],['Aula of locatie ceremonie',fx.locatie*rf,0],[ccEIND[ccS.type],fx.eind*rf,0],['Bloemen, muziek, sfeer',fx.sfeer*rf,0],['Rouwkaarten en advertentie',fx.comm*rf,0],['Uitvaartondernemer',fx.ondernemer*rf,0],['Catering en condoleance',cater,1]];
+  var hh='';v.forEach(function(r){hh+='<div class="cc-rij"><span class="n">'+r[0]+(r[2]?' <span class="tag">VARIABEL</span>':'')+'</span><span class="w">'+ccEuro(r[1])+'</span></div>';});
+  hh+='<div class="cc-rij tot"><span class="n">Totaal</span><span class="w">'+ccEuro(tot)+'</span></div>';
+  document.getElementById('cc-verd').innerHTML=hh;
+}
+function renderCalc(){
+  var back='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var h='<div class="hd simple"><button class="back" onclick="openHub(\'tools\',\'tab\')">'+back+'</button><div><h1>Uitvaartkosten PRO+</h1><div class="sub">Snelle schatting \u00b7 25 regio\u0027s \u00b7 2026</div></div></div>';
+  h+='<div class="pad">';
+  h+='<div class="cc-step"><div class="cc-lbl"><span class="num">1</span>Type uitvaart</div><div class="cc-opts" id="cc-type">';
+  [['cremeren','\ud83d\udd25','Cremeren'],['begraven','\u26b0\ufe0f','Begraven'],['natuur','\ud83c\udf3f','Natuur']].forEach(function(o){h+='<button class="cc-opt'+(o[0]==='cremeren'?' act':'')+'" data-t="'+o[0]+'"><span class="ic">'+o[1]+'</span><div class="nm">'+o[2]+'</div></button>';});
+  h+='</div></div>';
+  h+='<div class="cc-step"><div class="cc-lbl"><span class="num">2</span>Niveau ceremonie</div><div class="cc-opts" id="cc-niv">';
+  [['basis','\ud83d\udce6','Basis'],['standaard','\ud83c\udfaf','Standaard'],['uitgebreid','\u2728','Uitgebreid']].forEach(function(o){h+='<button class="cc-opt'+(o[0]==='standaard'?' act':'')+'" data-n="'+o[0]+'"><span class="ic">'+o[1]+'</span><div class="nm">'+o[2]+'</div></button>';});
+  h+='</div></div>';
+  h+='<div class="cc-step"><div class="cc-lbl"><span class="num">3</span>Regio</div><select class="cc-sel" id="cc-regio"></select></div>';
+  h+='<div class="cc-step"><div class="cc-lbl"><span class="num">4</span>Aantal gasten</div><div class="cc-slid"><div class="top"><span>Genodigden</span><span class="v" id="cc-gv">75</span></div><input type="range" id="cc-g" min="10" max="300" step="5" value="75"></div></div>';
+  h+='<div class="cc-total"><div class="l">Geschatte totale kosten</div><div class="big" id="cc-tot">\u20ac0</div><div class="s" id="cc-sub">\u2014</div></div>';
+  h+='<div class="cc-dgrid"><div class="cc-db"><div class="l">Vaste kosten</div><div class="v" id="cc-vast">\u20ac0</div><div class="s">Onafhankelijk van gasten</div></div><div class="cc-db"><div class="l">Variabele kosten</div><div class="v" id="cc-var">\u20ac0</div><div class="s" id="cc-vsub">Catering per gast</div></div><div class="cc-db"><div class="l">Laag scenario</div><div class="v" id="cc-laag">\u20ac0</div><div class="s">Sober en basic</div></div><div class="cc-db"><div class="l">Hoog scenario</div><div class="v" id="cc-hoog">\u20ac0</div><div class="s">Uitgebreid en luxe</div></div></div>';
+  h+='<div class="cc-verd"><div class="cc-vt">Geschatte verdeling</div><div id="cc-verd"></div></div>';
+  h+='<a class="btn wide" href="'+u('/uitvaartkosten-calculator-pro')+'" target="_blank" rel="noopener" style="margin-top:14px">'+I.ext+' Open de volledige calculator</a>';
+  h+='<div class="foot">Indicatief, op basis van gemiddelde tarieven 2026.</div>';
+  h+='</div>';
+  document.getElementById('scr-calc').innerHTML=h;
+  var sel=document.getElementById('cc-regio');
+  ccREG.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.n;if(r.id==='eindhoven')o.selected=true;sel.appendChild(o);});
+  document.getElementById('cc-type').addEventListener('click',function(e){var b=e.target.closest('.cc-opt');if(!b)return;ccS.type=b.getAttribute('data-t');this.querySelectorAll('.cc-opt').forEach(function(o){o.classList.toggle('act',o===b);});ccUpdate();});
+  document.getElementById('cc-niv').addEventListener('click',function(e){var b=e.target.closest('.cc-opt');if(!b)return;ccS.niveau=b.getAttribute('data-n');this.querySelectorAll('.cc-opt').forEach(function(o){o.classList.toggle('act',o===b);});ccUpdate();});
+  sel.addEventListener('change',function(){ccS.regio=this.value;ccUpdate();});
+  document.getElementById('cc-g').addEventListener('input',function(){ccS.gasten=parseInt(this.value,10);document.getElementById('cc-gv').textContent=ccS.gasten;ccUpdate();});
+  ccUpdate();
+}
+
+// init
+renderHome(); renderGids(); renderArtikelen(); renderUitgaves(); renderMenu(); renderCalc();
+function tick(){var d=new Date();document.getElementById('clock').textContent=d.getHours()+':'+('0'+d.getMinutes()).slice(-2);}
+tick(); setInterval(tick,10000);
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+</body>
+</html>
