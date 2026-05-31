@@ -108,8 +108,8 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .b2b p{font-size:.8rem;color:rgba(255,255,255,.82);line-height:1.5;margin:8px 0 14px;font-weight:300;position:relative}
 
 /* categorie grid */
-.cats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.catbtn{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 13px;cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:500;color:var(--ink);text-align:left;display:flex;align-items:center;gap:9px;transition:background .15s;text-decoration:none}
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.catbtn{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 13px;cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:500;color:var(--ink);text-align:left;display:flex;align-items:center;gap:9px;transition:background .15s,transform .15s,box-shadow .15s;text-decoration:none;min-width:0;overflow-wrap:anywhere}
 .catbtn:hover{background:var(--soft)}
 .catbtn .d{width:7px;height:7px;border-radius:50%;background:var(--orange);flex:none}
 .searchbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 15px;margin-bottom:14px;color:var(--muted)}
@@ -177,6 +177,80 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .cc-rij.tot{border-top:2px solid var(--plum);margin-top:2px;padding-top:13px}
 .cc-rij.tot .n{font-weight:700;color:var(--plum)}
 .cc-rij.tot .w{color:var(--orange2);font-size:1.05rem}
+
+/* carrousel nieuwste artikelen */
+.carousel{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 6px 18px rgba(74,25,66,.05)}
+.car-track{display:flex;transition:transform .5s ease}
+.car-slide{min-width:100%;position:relative;cursor:pointer}
+.car-imgwrap{position:relative;height:210px;overflow:hidden;background:var(--cream2)}
+.car-img{width:100%;height:100%;object-fit:cover;display:block}
+.car-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,20,40,.92) 0%,rgba(44,20,40,.35) 45%,transparent 75%)}
+.car-cat{position:absolute;top:12px;left:12px;background:rgba(232,131,74,.95);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.3px;padding:4px 10px;border-radius:20px;text-transform:uppercase}
+.car-txt{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;color:#fff}
+.car-txt h3{font-size:.96rem;font-weight:600;line-height:1.3;margin-bottom:5px;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.car-txt .d{font-size:.72rem;color:rgba(255,255,255,.85)}
+.car-dots{display:flex;justify-content:center;gap:7px;padding:12px 0 13px;background:#fff}
+.car-dot{width:7px;height:7px;border-radius:50%;background:#dcd0da;border:none;cursor:pointer;padding:0;transition:background .2s,width .2s}
+.car-dot.act{background:var(--orange);width:20px;border-radius:4px}
+.footlinks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px;font-size:.78rem}
+.footlinks a{color:var(--plum2);font-weight:600;cursor:pointer}
+.footlinks span{color:#c9bcc8}
+
+/* sectie-subkop binnen hubs */
+.sub-t{font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--plum2);margin:24px 4px 8px;padding-top:16px;border-top:1px solid var(--line)}
+/* prominente tool-knop binnen een hub */
+.hub-cta{display:flex;align-items:center;gap:12px;width:100%;border:none;cursor:pointer;font-family:var(--sans);text-align:left;color:#fff;background:linear-gradient(135deg,var(--orange) 0%,var(--orange2) 100%);border-radius:15px;padding:15px 17px;box-shadow:0 6px 18px rgba(200,98,42,.28);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s;margin-bottom:10px}
+.hub-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(200,98,42,.42)}
+.hub-cta:active{transform:scale(.98)}
+.hub-cta .hci{width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.22);border-radius:10px}
+.hub-cta .hci svg{width:18px;height:18px}
+.hub-cta .hcl{flex:1;font-size:.96rem;font-weight:600}
+.hub-cta .hca{font-size:1.15rem;transition:transform .2s}
+.hub-cta:hover .hca{transform:translateX(4px)}
+
+/* knipperend nieuw-lampje */
+.livebadge{display:inline-flex;align-items:center;gap:5px;background:#fbe7da;color:var(--orange2);font-size:.56rem;font-weight:800;padding:3px 8px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;vertical-align:middle;margin-left:5px}
+.livedot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:livepulse 1.6s ease-in-out infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(232,131,74,.55)}70%{box-shadow:0 0 0 6px rgba(232,131,74,0)}100%{box-shadow:0 0 0 0 rgba(232,131,74,0)}}
+
+/* entree-animatie per scherm (rustig en gestaffeld) */
+@keyframes upIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.scr.on .pad>*{animation:upIn .5s cubic-bezier(.22,1,.36,1) both}
+.scr.on .pad>*:nth-child(1){animation-delay:.02s}
+.scr.on .pad>*:nth-child(2){animation-delay:.07s}
+.scr.on .pad>*:nth-child(3){animation-delay:.12s}
+.scr.on .pad>*:nth-child(4){animation-delay:.17s}
+.scr.on .pad>*:nth-child(5){animation-delay:.22s}
+.scr.on .pad>*:nth-child(6){animation-delay:.27s}
+.scr.on .pad>*:nth-child(7){animation-delay:.32s}
+.scr.on .pad>*:nth-child(n+8){animation-delay:.36s}
+
+/* zachte glans over oranje knoppen */
+.btn,.hub-cta{position:relative;overflow:hidden}
+.btn::after,.hub-cta::after{content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:shine 5s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,55%{left:-70%}78%{left:130%}100%{left:130%}}
+.btn:active{transform:scale(.97)}
+
+/* tegels, rijen en categorieen: zachte hover en druk */
+.tile,.row{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.tile:active,.row:active,.catbtn:active,.artcard:active{transform:scale(.98)}
+.catbtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(74,25,66,.08);border-color:var(--orange)}
+
+/* carrousel: zachte beeldzoom */
+.car-img{transition:transform 6s ease}
+.carousel:hover .car-img{transform:scale(1.05)}
+.car-slide:active{opacity:.92}
+
+/* onderbalk: actief-pop */
+.nav-item.act .nic{animation:navpop .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes navpop{0%{transform:scale(.7)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+@media (prefers-reduced-motion: reduce){
+ .scr.on .pad>*{animation:none!important}
+ .btn::after,.hub-cta::after{display:none}
+ .livedot,.nav-item.act .nic{animation:none}
+ .carousel:hover .car-img{transform:none}
+}
 
 #scr-tool{flex-direction:column; overflow:hidden}
 #scr-tool.on{display:flex}
@@ -277,10 +351,15 @@ var SECTIONS={
    {l:'Uitvaartkosten', s:'Wat kost een uitvaart', p:'/uitvaartkosten'},
    {l:'Kostenvergelijker', s:'Vergelijk per regio', p:'/uitvaart-kostenvergelijker'},
    {l:'Wat kost wat bij een uitvaart', s:'Alle posten uitgelegd', p:'/wat-kost-wat-bij-een-uitvaart'},
-   {l:'Uitvaartverzekeringen', s:'Vergelijk de dekkingen', p:'/uitvaartverzekering'}
+   {l:'Uitvaartverzekeringen', s:'Vergelijk de dekkingen', p:'/uitvaartverzekering'},
+   {head:'Bijbehorende tools'},
+   {l:'Uitvaartkosten calculator PRO+', s:'Schat de kosten in 25 regio\u0027s', tool:TB+'uitvaartkosten-calculator.html'},
+   {l:'Compleet stappenplan', s:'Stap voor stap door alles heen', tool:TB+'stappenplan.html'},
+   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', tool:TB+'uitvaartmatcher.html'}
  ]},
  tools:{title:'Tools en hulpmiddelen', icon:'tools', sub:'Reken en kies, gratis en privacyvriendelijk.', intro:'De volledige tools werken hier in de app. Er wordt niets opgeslagen.', items:[
    {l:'Uitvaartkosten calculator PRO+', s:'Schat de kosten in 25 regio\u0027s', tool:TB+'uitvaartkosten-calculator.html'},
+   {l:'Compleet stappenplan', s:'Wat moet je regelen na een overlijden', tool:TB+'stappenplan.html'},
    {l:'Erfbelasting calculator', s:'Bereken de erfbelasting 2026', tool:TB+'erfbelasting-calculator-pro.html'},
    {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
    {l:'Erfenis aanvaarden keuzehulp', s:'Aanvaarden, beneficiair of verwerpen', tool:TB+'beneficiair-aanvaarden-tool.html'},
@@ -302,11 +381,13 @@ var SECTIONS={
  ]},
  rouw:{title:'Rouw en steun', icon:'rouw', sub:'Je hoeft het niet alleen te dragen.', intro:'Rust en steun rond verlies, in je eigen tempo.', items:[
    {l:'Rouwverwerking', s:'Omgaan met verlies', p:'/rouwverwerking'},
-   {l:'Interactieve rouwpagina', s:'Houd bij hoe het met je gaat', p:'/rouw'},
    {l:'Rouwverwerking per doelgroep', s:'Voor kinderen, jongeren en meer', p:'/rouw-per-doelgroep'},
    {l:'Kosten van rouw', s:'De minder zichtbare kant', p:'/kosten-van-rouw'},
    {l:'Rouw atlas wereldwijd', s:'Rouwgebruiken over de wereld', p:'/rouw-atlas'},
-   {l:'Palliatieve zorg en hospice', s:'Zorg in de laatste fase', p:'/palliatieve-zorg'}
+   {l:'Palliatieve zorg en hospice', s:'Zorg in de laatste fase', p:'/palliatieve-zorg'},
+   {head:'Hulpmiddelen'},
+   {btn:true, l:'Open de interactieve rouwpagina', tool:TB+'Rouwpagina.html'},
+   {l:'Mijn Afscheidsmaatje', s:'Rouwtool speciaal voor kinderen', tool:TB+'kinderen-afscheid-tool.html'}
  ]},
  erf:{title:'Nalatenschap en erfrecht', icon:'erf', sub:'Erfenis, testament en de financiele kant.', intro:'Begrijp je rechten en plichten rond de nalatenschap.', items:[
    {l:'Nalatenschap en erfrecht', s:'De basis uitgelegd', p:'/nalatenschap-erfrecht'},
@@ -315,6 +396,7 @@ var SECTIONS={
    {l:'Nabestaanden financieel', s:'Inkomen en regelingen', p:'/nabestaanden-financieel'},
    {l:'Digitale nalatenschap', s:'Accounts en wachtwoorden', p:'/digitale-nalatenschap'},
    {l:'Wat als scenario\u0027s', s:'Doordenk je situatie', p:'/wat-als-scenarios'},
+   {head:'Bijbehorende tools'},
    {l:'Erfbelasting calculator', s:'Bereken de erfbelasting', tool:TB+'erfbelasting-calculator-pro.html'},
    {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
    {l:'Erfenis aanvaarden keuzehulp', s:'Maak een onderbouwde keuze', tool:TB+'beneficiair-aanvaarden-tool.html'}
@@ -365,6 +447,8 @@ var MENU=[['home','Start','over'],['regelen','Uitvaart regelen','regelen'],['too
 // ===== HELPERS =====
 function esc(s){return s;}
 function rowHtml(it){
+  if(it.head){ return '<div class="sub-t">'+it.head+'</div>'; }
+  if(it.btn){ return '<button class="hub-cta" onclick="openTool(\''+it.tool+'\',\''+it.l.replace(/'/g,'')+'\')"><span class="hci">'+I.tools+'</span><span class="hcl">'+it.l+'</span><span class="hca">&#8594;</span></button>'; }
   var onclick, right;
   if(it.tool){ onclick="openTool('"+it.tool+"','"+it.l.replace(/'/g,'')+"')"; right=I.tools; }
   else if(it.screen){ onclick="openScreen('"+it.screen+"')"; right=''; }
@@ -393,8 +477,8 @@ function renderHome(){
   });
   h+='</div>';
   // artikelen
-  h+='<div class="sect-t">Artikelen</div>';
-  h+='<button class="row" onclick="openScreen(\'artikelen\')"><span class="ic">'+I.book+'</span><span class="tx"><h3>Nieuwste artikelen</h3><p>Dagelijks bijgewerkt, rechtstreeks van het platform</p></span><span class="ext">'+I.ext+'</span></button>';
+  h+='<div class="sect-t"><span>Nieuwste artikelen <span class="livebadge"><span class="livedot"></span>nieuw</span></span><a onclick="openScreen(\'artikelen\')">Alles</a></div>';
+  h+='<div class="carousel" id="carousel"><div class="car-track" id="car-track"></div><div class="car-dots" id="car-dots"></div></div>';
   // uitgaves
   h+='<div class="sect-t">Onze uitgaves</div>';
   h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Leg samen alles vast voor je nabestaanden, een tastbaar naslagwerk.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
@@ -404,7 +488,8 @@ function renderHome(){
   h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Zet jouw organisatie in de app</h3><p>Word zichtbaar bij duizenden nabestaanden die op zoek zijn naar de juiste specialist.</p><button class="btn" onclick="openHub(\'b2b\')">Meer weten</button></div>';
   // trust
   h+='<a class="trust" onclick="openExt(\''+u('/geciteerd-door-overheid')+'\')">'+I.cite+'<span>Onafhankelijk en betrouwbaar, geciteerd door de overheid.</span></a>';
-  h+='<div class="foot">Uitvaart-Platform.nl · De Nieuwe Erven 3, Cuijk<br>Informatie en gids openen op het platform</div>';
+  h+='<div class="footlinks"><a onclick="openHub(\'over\')">Over ons</a><span>·</span><a onclick="openExt(\''+u('/contact')+'\')">Contact</a><span>·</span><a onclick="openExt(\''+u('/privacy-en-cookieverklaring')+'\')">Privacy</a><span>·</span><a onclick="openExt(\''+u('/algemene-voorwaarden')+'\')">Voorwaarden</a></div>';
+  h+='<div class="foot">Uitvaart-Platform.nl · De Nieuwe Erven 3, Cuijk<br>Onafhankelijk en betrouwbaar</div>';
   h+='</div>';
   document.getElementById('scr-home').innerHTML=h;
 }
@@ -553,8 +638,46 @@ function renderCalc(){
   ccUpdate();
 }
 
+// ===== CARROUSEL NIEUWSTE ARTIKELEN =====
+var carI=0, carN=0, carTimer=null;
+window.carGo=function(i){
+  var t=document.getElementById('car-track'); if(!t||!carN)return;
+  carI=((i%carN)+carN)%carN;
+  t.style.transform='translateX(-'+(carI*100)+'%)';
+  var dots=document.querySelectorAll('.car-dot');
+  for(var k=0;k<dots.length;k++) dots[k].classList.toggle('act',k===carI);
+};
+function carBuild(list){
+  var track=document.getElementById('car-track'); if(!track||!list||!list.length)return;
+  carN=list.length;
+  var h='',dh='';
+  list.forEach(function(a,i){
+    var url=(a.s&&a.s.indexOf('http')===0)?a.s:SITE+(a.s||'');
+    var cat=a.c?'<span class="car-cat">'+a.c+'</span>':'';
+    var dat=a.d?'<div class="d">'+a.d+'</div>':'';
+    h+='<div class="car-slide" onclick="openExt(\''+url+'\')"><div class="car-imgwrap"><img class="car-img" src="'+a.i+'" alt="" loading="lazy"><div class="car-shade"></div>'+cat+'<div class="car-txt"><h3>'+a.t+'</h3>'+dat+'</div></div></div>';
+    dh+='<button class="car-dot'+(i===0?' act':'')+'" onclick="carGo('+i+')" aria-label="Artikel '+(i+1)+'"></button>';
+  });
+  track.innerHTML=h; track.style.transform='translateX(0)'; carI=0;
+  var dots=document.getElementById('car-dots'); if(dots) dots.innerHTML=dh;
+  if(carTimer) clearInterval(carTimer);
+  carTimer=setInterval(function(){ carGo(carI+1); },5000);
+}
+function renderCarousel(){
+  carBuild(ARTS);
+  var c=document.getElementById('carousel');
+  if(c){
+    c.addEventListener('mouseenter',function(){ if(carTimer){clearInterval(carTimer); carTimer=null;} });
+    c.addEventListener('mouseleave',function(){ if(!carTimer) carTimer=setInterval(function(){ carGo(carI+1); },5000); });
+  }
+  // automatische verversing: haal de actuele lijst op van hetzelfde domein
+  try{
+    fetch('./articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length) carBuild(j); }).catch(function(){});
+  }catch(e){}
+}
+
 // init
-renderHome(); renderGids(); renderArtikelen(); renderUitgaves(); renderMenu(); renderCalc();
+renderHome(); renderGids(); renderArtikelen(); renderUitgaves(); renderMenu(); renderCalc(); renderCarousel();
 function tick(){var d=new Date();document.getElementById('clock').textContent=d.getHours()+':'+('0'+d.getMinutes()).slice(-2);}
 tick(); setInterval(tick,10000);
 })();
