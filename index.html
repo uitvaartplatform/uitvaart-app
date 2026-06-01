@@ -684,5 +684,66 @@ tick(); setInterval(tick,10000);
 })();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+<script>
+/* ===== Pushmeldingen — Uitvaart-Platform (zelf-gehost via Cloudflare) ===== */
+(function(){
+  var PUSH_API = "https://uitvaart-push.weathered-dust-cab6.workers.dev";
+  var VAPID_PUBLIC = "BAyH-lydIq_j0Pef5dAUF2-axPqZkgfVS2EiZbm-dNVOtEe9i1g7X1hAs81FkrQM5KkjJQoEkgFFysSTN-0JGBM";
+
+  function urlB64ToUint8(base64){
+    var pad = '='.repeat((4 - base64.length % 4) % 4);
+    var b64 = (base64 + pad).replace(/-/g,'+').replace(/_/g,'/');
+    var raw = atob(b64), arr = new Uint8Array(raw.length);
+    for (var i=0;i<raw.length;i++) arr[i] = raw.charCodeAt(i);
+    return arr;
+  }
+  function supported(){
+    return ('serviceWorker' in navigator) && ('PushManager' in window) && ('Notification' in window);
+  }
+  function refreshLabel(){
+    var b = document.getElementById('push-btn'); if(!b) return;
+    if(!supported()){ b.textContent='\uD83D\uDD14 Meldingen niet beschikbaar'; b.disabled=true; return; }
+    if(Notification.permission === 'denied'){ b.textContent='\uD83D\uDD15 Meldingen geblokkeerd'; return; }
+    if(Notification.permission === 'granted'){
+      navigator.serviceWorker.ready.then(function(reg){
+        reg.pushManager.getSubscription().then(function(sub){
+          b.textContent = sub ? '\uD83D\uDD14 Meldingen staan aan' : '\uD83D\uDD14 Meldingen ontvangen';
+        });
+      });
+    } else { b.textContent='\uD83D\uDD14 Meldingen ontvangen'; }
+  }
+  function togglePush(){
+    if(!supported()) return;
+    Notification.requestPermission().then(function(perm){
+      if(perm !== 'granted'){ refreshLabel(); return; }
+      navigator.serviceWorker.ready.then(function(reg){
+        reg.pushManager.getSubscription().then(function(existing){
+          if(existing){ refreshLabel(); return; }
+          reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: urlB64ToUint8(VAPID_PUBLIC) })
+            .then(function(sub){
+              return fetch(PUSH_API + '/subscribe', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sub) });
+            })
+            .then(function(){ refreshLabel(); })
+            .catch(function(err){ console.log('push-aanmelding mislukt', err); });
+        });
+      });
+    });
+  }
+  function injectButton(){
+    var panel = document.querySelector('.ov .panel');
+    if(!panel || document.getElementById('push-optin')) return;
+    var wrap = document.createElement('div');
+    wrap.id = 'push-optin';
+    wrap.style.cssText = 'padding:12px 0 4px;margin-top:8px;border-top:1px solid rgba(0,0,0,.08)';
+    var btn = document.createElement('button');
+    btn.id = 'push-btn'; btn.className = 'mitem'; btn.style.width = '100%';
+    btn.onclick = togglePush;
+    wrap.appendChild(btn); panel.appendChild(wrap);
+    refreshLabel();
+  }
+  window.addEventListener('load', function(){ setTimeout(injectButton, 400); });
+})();
+</script>
+
 </body>
 </html>

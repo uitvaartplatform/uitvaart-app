@@ -1,5 +1,5 @@
 // Service worker voor de Uitvaart-Platform app
-var CACHE = 'up-app-v6';
+var CACHE = 'up-app-v7';
 var SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', function(e){
@@ -35,6 +35,41 @@ self.addEventListener('fetch', function(e){
         caches.open(CACHE).then(function(c){ c.put(req, copy); });
         return res;
       }).catch(function(){ return caches.match('./index.html'); });
+    })
+  );
+});
+
+// ===== PUSHMELDINGEN =====
+// Bij een melding leest de app notify.json van de eigen site uit
+// en toont titel + tekst + link die daarin staan.
+self.addEventListener('push', function(e){
+  e.waitUntil(
+    fetch('./notify.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function(r){ return r.json(); })
+      .catch(function(){ return {}; })
+      .then(function(n){
+        var title = (n && n.title) || 'Uitvaart-Platform';
+        var body  = (n && n.body)  || 'Er staat nieuwe informatie voor je klaar in de app.';
+        var url   = (n && n.url)   || '/';
+        return self.registration.showNotification(title, {
+          body: body,
+          icon: './icon-192.png',
+          badge: './icon-192.png',
+          data: { url: url }
+        });
+      })
+  );
+});
+
+self.addEventListener('notificationclick', function(e){
+  e.notification.close();
+  var target = (e.notification.data && e.notification.data.url) || '/';
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(list){
+      for (var i = 0; i < list.length; i++) {
+        if ('focus' in list[i]) return list[i].focus();
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(target);
     })
   );
 });
