@@ -3,6 +3,9 @@
       "target": {
         "namespace": "android_app",
         "package_name": "app.uitvaartplatform.twa",
-        "sha256_cert_fingerprints": ["75:E0:77:95:8A:71:31:0F:11:83:A1:6D:E8:64:B1:DE:05:1E:B0:FB:F5:53:D6:33:89:F2:F1:89:9E:1A:BC:A2"]
+        "sha256_cert_fingerprints": [
+          "75:E0:77:95:8A:71:31:0F:11:83:A1:6D:E8:64:B1:DE:05:1E:B0:FB:F5:53:D6:33:89:F2:F1:89:9E:1A:BC:A2",
+          "9F:BC:83:98:41:4A:A3:85:D1:5F:54:32:C3:D5:7C:3D:9A:69:C0:CC:48:70:E5:4B:6C:4A:F7:F2:EF:4D:AD:24"
+        ]
       }
     }]
