@@ -717,15 +717,11 @@ tick(); setInterval(tick,10000);
     Notification.requestPermission().then(function(perm){
       if(perm !== 'granted'){ refreshLabel(); return; }
       navigator.serviceWorker.ready.then(function(reg){
-        reg.pushManager.getSubscription().then(function(existing){
-          if(existing){ refreshLabel(); return; }
-          reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: urlB64ToUint8(VAPID_PUBLIC) })
-            .then(function(sub){
-              return fetch(PUSH_API + '/subscribe', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sub) });
-            })
-            .then(function(){ refreshLabel(); })
-            .catch(function(err){ console.log('push-aanmelding mislukt', err); });
-        });
+        reg.pushManager.getSubscription()
+          .then(function(existing){ return existing || reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: urlB64ToUint8(VAPID_PUBLIC) }); })
+          .then(function(sub){ return fetch(PUSH_API + '/subscribe', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sub) }); })
+          .then(function(){ refreshLabel(); })
+          .catch(function(err){ console.log('push-aanmelding mislukt', err); });
       });
     });
   }
