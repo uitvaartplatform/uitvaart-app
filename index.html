@@ -22,6 +22,7 @@
   --sans:'Poppins',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+a,button{color:inherit}
 html,body{height:100%}
 body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased;
   background:radial-gradient(120% 80% at 80% 0%, #efe2ee 0%, transparent 55%), linear-gradient(150deg,#f3ecf2,#efe7e0);
@@ -59,7 +60,7 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .tile:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(74,25,66,.08)}
 .tile .ic{width:42px;height:42px;border-radius:13px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--plum);margin-bottom:10px}
 .tile .ic svg{width:22px;height:22px}
-.tile h3{font-size:.92rem;font-weight:600}
+.tile h3{font-size:.92rem;font-weight:600;color:var(--plum)}
 .tile p{font-size:.74rem;color:var(--muted);margin-top:3px;line-height:1.4}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .sect-t{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--plum2);margin:24px 2px 12px;display:flex;align-items:center;justify-content:space-between}
@@ -70,7 +71,7 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .row .ic{width:40px;height:40px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--plum);flex:none}
 .row .ic svg{width:20px;height:20px}
 .row .tx{flex:1;min-width:0}
-.row .tx h3{font-size:.9rem;font-weight:600}
+.row .tx h3{font-size:.9rem;font-weight:600;color:var(--plum)}
 .row .tx p{font-size:.74rem;color:var(--muted);margin-top:2px;line-height:1.35}
 .row .ext{color:#c4b6c2;flex:none}
 .row .ext svg{width:17px;height:17px}
