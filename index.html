@@ -115,6 +115,27 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .catbtn .d{width:7px;height:7px;border-radius:50%;background:var(--orange);flex:none}
 .searchbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 15px;margin-bottom:14px;color:var(--muted)}
 .searchbar svg{width:18px;height:18px;flex:none}.searchbar span{font-size:.85rem}
+/* artikelen blader-menu */
+.acats{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px;margin-bottom:8px}
+.acats::-webkit-scrollbar{display:none}
+.achip{flex:none;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:7px 14px;font-size:.8rem;font-weight:600;color:var(--plum);cursor:pointer;white-space:nowrap}
+.achip:hover{border-color:var(--plum2)}
+.alist{margin:2px 0 18px}
+.acard{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;cursor:pointer;font-family:var(--sans);padding:0;-webkit-tap-highlight-color:transparent}
+.acard:active{transform:scale(.99)}
+.acard .aimg{position:relative;height:185px;background:var(--soft)}
+.acard .aimg img{width:100%;height:100%;object-fit:cover;display:block}
+.acard .acat{position:absolute;top:11px;left:11px;background:var(--orange);color:#fff;font-size:.64rem;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.acard .abody{padding:13px 15px 15px}
+.acard .abody h3{font-size:1rem;line-height:1.3;color:var(--plum);margin:0 0 6px;font-weight:600}
+.acard .abody .ad{font-size:.76rem;color:var(--muted)}
+@media (min-width:700px){ body.app .alist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px} body.app .acard{margin-bottom:0} }
+/* tekstgrootte-knoppen in het menu */
+.menu-tools{padding:14px 18px 8px;border-top:1px solid var(--line);margin-top:4px}
+.mt-lbl{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--plum2);margin-bottom:10px}
+.ts-opts{display:flex;gap:8px}
+.ts-btn{flex:1;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:9px 0;cursor:pointer;font-family:var(--sans);font-weight:700;color:var(--plum);line-height:1}
+.ts-btn.act{border-color:var(--orange);background:#fff8f3;color:var(--orange2)}
 
 .trust{display:flex;gap:9px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.76rem;color:#5f5360;line-height:1.4;margin-top:6px;cursor:pointer;text-decoration:none}
 .trust svg{width:20px;height:20px;color:var(--plum2);flex:none}
@@ -265,6 +286,64 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
   .screen{border-radius:0}
   .island{display:none}
   .status{height:env(safe-area-inset-top,18px);padding-bottom:0}
+}
+
+/* ===== APP-MODUS: schermvullend op een echt toestel (telefoon EN iPad/tablet) =====
+   Wordt geactiveerd via de body-class .app (native app, geinstalleerde PWA of
+   aanraakscherm) en via pointer:coarse als vangnet. Zo verschijnt de
+   telefoon-maquette alleen nog als preview in een desktopbrowser. */
+body.app{padding:0;background:var(--cream);display:block;min-height:100vh;min-height:100dvh}
+body.app .cap{display:none}
+body.app .phone{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none}
+body.app .screen{border-radius:0}
+body.app .island{display:none}
+body.app .status{height:env(safe-area-inset-top,0);min-height:0;padding-bottom:0}
+
+@media (pointer:coarse) and (min-width:461px){
+  body{padding:0;background:var(--cream);display:block}
+  .cap{display:none}
+  .phone{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none}
+  .screen{border-radius:0}
+  .island{display:none}
+  .status{height:env(safe-area-inset-top,0);min-height:0;padding-bottom:0}
+}
+
+/* ===== iPad / tablet-opmaak: de bredere ruimte netjes benutten =====
+   Gecentreerde leeskolom + meer kolommen in de roosters, zodat het een echte
+   iPad-app wordt in plaats van een uitgerekte telefoon. */
+@media (min-width:700px){
+  body.app .pad{max-width:760px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px;padding-bottom:34px}
+  /* kop- en navigatie-inhoud op dezelfde kolombreedte uitlijnen */
+  body.app .hd{padding-left:max(16px,calc((100% - 760px)/2 + 4px));padding-right:max(16px,calc((100% - 760px)/2 + 4px))}
+  body.app .nav{padding-left:max(4px,calc((100% - 620px)/2));padding-right:max(4px,calc((100% - 620px)/2))}
+  /* roosters: meer kolommen */
+  body.app .grid2{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  body.app .cats{grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+  body.app .cc-dgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  /* beelden mogen groter in de bredere kolom */
+  body.app .car-imgwrap{height:300px}
+  body.app .artcard .img{height:160px}
+  body.app .hscroll .artcard{width:260px}
+  /* productkaarten naast elkaar */
+  body.app #scr-home .prod,body.app #scr-uitgaves .prod{display:inline-flex;width:calc(50% - 7px)}
+  body.app #scr-uitgaves .prod:nth-child(odd){margin-right:14px}
+  /* iets ruimere typografie zodat het niet als ingezoomde telefoon oogt */
+  body.app .tile h3{font-size:.98rem}
+  body.app .row .tx h3{font-size:.95rem}
+  /* hub-lijsten (Tools, Regelen, Kennis, Nalatenschap, Rouw) in twee kolommen */
+  body.app #scr-hub .pad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;align-content:start}
+  body.app #scr-hub .pad>.intro,
+  body.app #scr-hub .pad>.sub-t,
+  body.app #scr-hub .pad>.b2b,
+  body.app #scr-hub .pad>.hub-cta{grid-column:1 / -1}
+  body.app #scr-hub .row{margin-bottom:0;height:100%}
+}
+@media (min-width:1000px){
+  body.app .pad{max-width:920px}
+  body.app .hd{padding-left:max(16px,calc((100% - 920px)/2 + 4px));padding-right:max(16px,calc((100% - 920px)/2 + 4px))}
+  body.app .grid2{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.app .cats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  body.app .car-imgwrap{height:360px}
 }
 </style>
 </head>
@@ -431,12 +510,15 @@ var CATS=[['Afscheidskunst','afscheidskunst'],['Asverstrooiing','asverstrooiing'
 // Nieuwste artikelen
 var IMG='https://app.uitvaart-platform.nl/_images/';
 var ARTS=[
+ {t:'Overlijden tijdens je vakantie? Dit stappenplan helpt je alles vooraf goed te regelen',c:'Repatriering',d:'3 juni 2026',s:'/artikelen/overlijden-tijdens-je-vakantie-dit-stappenplan-helpt-je-alles-vooraf-goed-te-regelen',i:IMG+'21204/pexels-jakubzerdzicki-33266834.jpg?w=600&fm=jpeg'},
+ {t:'De betekenis van de zwarte rouwvlag op een rouwauto: waarom heeft deze drie strepen?',c:'Rouwvervoer',d:'1 juni 2026',s:'/artikelen/de-betekenis-van-de-zwarte-rouwvlag-op-een-rouwauto-waarom-heeft-deze-drie-strepen',i:IMG+'21209/Schermafbeelding-2026-06-01-om-08.48.51.png?w=600&fm=png'},
  {t:'Overlijden in Belgie: wat moet je regelen als Nederlander?',c:'Repatriering',d:'29 mei 2026',s:'/artikelen/overlijden-in-belgie-wat-moet-je-regelen-als-nederlander',i:IMG+'20960/pexels-efrem-efre-2786187-13163692.jpg?w=600&fm=jpeg'},
  {t:'PostNL verhoogt prijs: rouwzegel stijgt naar 3,25 euro',c:'Rouwdrukwerk',d:'28 mei 2026',s:'/artikelen/postnl-verhoogt-prijs-rouwzegel-stijgt-naar-3-25-euro',i:IMG+'21177/pexels-jan-van-der-wolf-11680885-14886806.jpg?w=600&fm=jpeg'},
  {t:'Levend begraven worden: hoe vaak komt het echt voor?',c:'Rouwvervoer',d:'27 mei 2026',s:'/artikelen/levend-begraven-worden-hoe-vaak-komt-het-echt-voor',i:IMG+'20958/pexels-ivan-s-8963850.jpg?w=600&fm=jpeg'},
  {t:'Gecondoleerd zeggen in verschillende talen',c:'Afscheidskunst',d:'22 mei 2026',s:'/artikelen/gecondoleerd-zeggen-in-verschillende-talen-een-gids-voor-internationaal-medeleven',i:IMG+'20850/pexels-thirdman-7659454.jpg?w=600&fm=jpeg'},
  {t:'Hoeveel mensen overlijden in Nederland door overgewicht?',c:'Locatie',d:'20 mei 2026',s:'/artikelen/hoeveel-mensen-overlijden-in-nederland-door-overgewicht',i:IMG+'20848/pexels-shvets-production-6975474.jpg?w=600&fm=jpeg'},
- {t:'Uitvaart-Platform.nl lanceert een van de grootste kennisbanken',c:'Media',d:'20 mei 2026',s:'/artikelen/uitvaart-platformnl-lanceert-een-van-de-grootste-kennisbanken-binnen-de-uitvaartbranche',i:IMG+'20877/WhatsApp-Image-2026-05-20-at-10.32.38.jpeg?w=600&fm=jpeg'}
+ {t:'Uitvaart-Platform.nl lanceert een van de grootste kennisbanken',c:'Media',d:'20 mei 2026',s:'/artikelen/uitvaart-platformnl-lanceert-een-van-de-grootste-kennisbanken-binnen-de-uitvaartbranche',i:IMG+'20877/WhatsApp-Image-2026-05-20-at-10.32.38.jpeg?w=600&fm=jpeg'},
+ {t:'Waarom wordt een grafsteen pas later geplaatst op een graf?',c:'Graf en gedenktekens',d:'29 april 2026',s:'/artikelen/waarom-wordt-een-grafsteen-pas-later-geplaatst-op-een-graf',i:IMG+'19164/pexels-aksioart-8700691.jpg?w=600&fm=jpeg'}
 ];
 
 // Artikelcategorieen (filteren de artikelenpagina via ?category=<id>)
@@ -532,14 +614,26 @@ function renderGids(){
 }
 
 // ===== ARTIKELEN =====
+function articleCard(a){
+  var url=(a.s&&a.s.indexOf('http')===0)?a.s:u(a.s||'');
+  var cat=a.c?'<span class="acat">'+a.c+'</span>':'';
+  var img=a.i?'<div class="aimg">'+cat+'<img src="'+a.i+'" alt="" loading="lazy"></div>':'';
+  var dat=a.d?'<div class="ad">'+a.d+'</div>':'';
+  return '<button class="acard" onclick="openExt(\''+url+'\')">'+img+'<div class="abody"><h3>'+a.t+'</h3>'+dat+'</div></button>';
+}
 function renderArtikelen(){
-  var h='<div class="hd simple"><button class="back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><h1>Artikelen</h1><div class="sub">Nieuws en tips, dagelijks bijgewerkt</div></div></div>';
+  var back='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var h='<div class="hd simple"><button class="back" onclick="goHome()">'+back+'</button><div><h1>Artikelen</h1><div class="sub">Blader door onze artikelen</div></div></div>';
   h+='<div class="pad">';
-  h+='<p class="intro">De nieuwste artikelen staan altijd actueel op het platform en worden elke dag bijgewerkt.</p>';
-  h+='<a class="btn wide" href="'+u('/artikelen')+'" target="_blank" rel="noopener">'+I.ext+' Bekijk de nieuwste artikelen</a>';
-  h+='<div class="sect-t">Categorieen</div>';
-  h+='<div class="cats">';
-  ARTCATS.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/artikelen?category='+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  h+='<p class="intro">Lees onze artikelen over uitvaart, rouw en nalatenschap. Tik op een artikel om het te lezen op het platform.</p>';
+  h+='<div class="sect-t">Nieuwste artikelen</div>';
+  h+='<div class="alist">';
+  ARTS.forEach(function(a){ h+=articleCard(a); });
+  h+='</div>';
+  h+='<a class="btn wide" href="'+u('/artikelen')+'" target="_blank" rel="noopener">'+I.ext+' Alle artikelen bekijken</a>';
+  h+='<div class="sect-t">Blader per categorie</div>';
+  h+='<div class="acats">';
+  ARTCATS.forEach(function(c){ h+='<a class="achip" onclick="openExt(\''+u('/artikelen?category='+c[1])+'\')">'+c[0]+'</a>'; });
   h+='</div>';
   h+='</div>';
   document.getElementById('scr-artikelen').innerHTML=h;
@@ -568,6 +662,11 @@ function renderMenu(){
     else act="openHub('"+m[0]+"')";
     h+='<button class="mitem" onclick="closeMenu();'+act+'"><span class="ic">'+(I[m[2]]||I.over)+'</span>'+m[1]+'</button>';
   });
+  h+='<div class="menu-tools"><div class="mt-lbl">Tekstgrootte</div><div class="ts-opts">'
+    +'<button class="ts-btn" data-ts="1" onclick="setTextSize(1)" style="font-size:.9rem">A</button>'
+    +'<button class="ts-btn" data-ts="2" onclick="setTextSize(2)" style="font-size:1.1rem">A</button>'
+    +'<button class="ts-btn" data-ts="3" onclick="setTextSize(3)" style="font-size:1.35rem">A</button>'
+    +'</div></div>';
   document.getElementById('menu-list').innerHTML=h;
 }
 window.openMenu=function(){ document.getElementById('ov').classList.add('on'); };
@@ -673,12 +772,58 @@ function renderCarousel(){
   }
   // automatische verversing: haal de actuele lijst op van hetzelfde domein
   try{
-    fetch('./articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length) carBuild(j); }).catch(function(){});
+    fetch('./articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length){ ARTS=j; carBuild(j); renderArtikelen(); } }).catch(function(){});
+  }catch(e){}
+}
+
+// ===== APP-MODUS DETECTIE =====
+// Schakelt de schermvullende app-weergave in (i.p.v. de telefoon-maquette)
+// zodra de app als echte app draait: native (Capacitor), als geinstalleerde
+// PWA, of op een aanraakscherm zoals de iPad. Een gewone desktopbrowser
+// houdt de maquette-preview.
+function setAppMode(){
+  try{
+    var nativeApp = !!(window.Capacitor && (typeof window.Capacitor.isNativePlatform==='function' ? window.Capacitor.isNativePlatform() : window.Capacitor.isNative));
+    var mm = window.matchMedia || function(){return {matches:false};};
+    var standalone = mm('(display-mode: standalone)').matches || mm('(display-mode: fullscreen)').matches || window.navigator.standalone === true;
+    var coarse = mm('(pointer: coarse)').matches;
+    if(nativeApp || standalone || coarse){ document.body.classList.add('app'); }
+  }catch(e){}
+}
+setAppMode();
+window.addEventListener('load', setAppMode);
+document.addEventListener('deviceready', setAppMode, {once:true});
+
+// ===== TEKSTGROOTTE (toegankelijkheid, fijn voor groter lezen) =====
+function applyTextSize(lvl){
+  lvl=parseInt(lvl,10)||1;
+  var px = lvl===3?20 : lvl===2?18 : 16;
+  document.documentElement.style.fontSize = px+'px';
+  try{ localStorage.setItem('uvp-textsize', String(lvl)); }catch(e){}
+  var btns=document.querySelectorAll('.ts-btn');
+  for(var i=0;i<btns.length;i++){ btns[i].classList.toggle('act', btns[i].getAttribute('data-ts')===String(lvl)); }
+}
+window.setTextSize=function(l){ applyTextSize(l); };
+function initTextSize(){ var s=1; try{ s=parseInt(localStorage.getItem('uvp-textsize'),10)||1; }catch(e){} applyTextSize(s); }
+
+// ===== BEOORDELING VRAGEN (alleen in de native app, op een goed moment) =====
+function maybeAskReview(){
+  try{
+    var native = window.Capacitor && (typeof Capacitor.isNativePlatform==='function' ? Capacitor.isNativePlatform() : Capacitor.isNative);
+    if(!native || localStorage.getItem('uvp-reviewed')) return;
+    var n=(parseInt(localStorage.getItem('uvp-opens'),10)||0)+1;
+    localStorage.setItem('uvp-opens', String(n));
+    if(n>=3){
+      var RA = Capacitor.Plugins && Capacitor.Plugins.InAppReview;
+      if(RA && RA.requestReview){ RA.requestReview(); localStorage.setItem('uvp-reviewed','1'); }
+    }
   }catch(e){}
 }
 
 // init
 renderHome(); renderGids(); renderArtikelen(); renderUitgaves(); renderMenu(); renderCalc(); renderCarousel();
+initTextSize();
+setTimeout(maybeAskReview, 4000);
 function tick(){var d=new Date();document.getElementById('clock').textContent=d.getHours()+':'+('0'+d.getMinutes()).slice(-2);}
 tick(); setInterval(tick,10000);
 })();
@@ -697,10 +842,13 @@ tick(); setInterval(tick,10000);
     for (var i=0;i<raw.length;i++) arr[i] = raw.charCodeAt(i);
     return arr;
   }
+  function isNative(){ return !!(window.Capacitor && (typeof Capacitor.isNativePlatform==='function' ? Capacitor.isNativePlatform() : Capacitor.isNative)); }
+  function PN(){ return (window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.PushNotifications) || null; }
   function supported(){
     return ('serviceWorker' in navigator) && ('PushManager' in window) && ('Notification' in window);
   }
-  function refreshLabel(){
+  // ---- web / Android (web-push via service worker) ----
+  function refreshLabelWeb(){
     var b = document.getElementById('push-btn'); if(!b) return;
     if(!supported()){ b.textContent='\uD83D\uDD14 Meldingen niet beschikbaar'; b.disabled=true; return; }
     if(Notification.permission === 'denied'){ b.textContent='\uD83D\uDD15 Meldingen geblokkeerd'; return; }
@@ -712,19 +860,51 @@ tick(); setInterval(tick,10000);
       });
     } else { b.textContent='\uD83D\uDD14 Meldingen ontvangen'; }
   }
-  function togglePush(){
+  function togglePushWeb(){
     if(!supported()) return;
     Notification.requestPermission().then(function(perm){
-      if(perm !== 'granted'){ refreshLabel(); return; }
+      if(perm !== 'granted'){ refreshLabelWeb(); return; }
       navigator.serviceWorker.ready.then(function(reg){
         reg.pushManager.getSubscription()
           .then(function(existing){ return existing || reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: urlB64ToUint8(VAPID_PUBLIC) }); })
           .then(function(sub){ return fetch(PUSH_API + '/subscribe', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sub) }); })
-          .then(function(){ refreshLabel(); })
+          .then(function(){ refreshLabelWeb(); })
           .catch(function(err){ console.log('push-aanmelding mislukt', err); });
       });
     });
   }
+  // ---- iOS / Android native (APNs / FCM via Capacitor) ----
+  var nativeReady=false;
+  function refreshLabelNative(){
+    var b=document.getElementById('push-btn'); if(!b) return;
+    var on=false; try{ on=localStorage.getItem('uvp-native-push')==='1'; }catch(e){}
+    b.textContent = on ? '\uD83D\uDD14 Meldingen staan aan' : '\uD83D\uDD14 Meldingen ontvangen';
+  }
+  function nativeInit(){
+    var pn=PN(); if(!pn || nativeReady) return; nativeReady=true;
+    pn.addListener('registration', function(token){
+      try{ localStorage.setItem('uvp-native-push','1'); }catch(e){}
+      fetch(PUSH_API + '/subscribe-native', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ token: token && token.value, platform: (window.Capacitor && Capacitor.getPlatform && Capacitor.getPlatform()) || 'ios' }) }).catch(function(){});
+      refreshLabelNative();
+    });
+    pn.addListener('registrationError', function(err){ console.log('push registratie-fout', err); });
+    // tik op een melding -> open het juiste artikel (deep-link via data.url)
+    pn.addListener('pushNotificationActionPerformed', function(action){
+      var data = action && action.notification && action.notification.data;
+      var url = data && (data.url || data.link);
+      if(url && (''+url).indexOf('http')===0){ try{ window.open(url, '_blank', 'noopener'); }catch(e){} }
+    });
+  }
+  function togglePushNative(){
+    var pn=PN(); if(!pn) return;
+    pn.requestPermissions().then(function(res){
+      if(res && res.receive === 'granted'){ pn.register(); }
+      else { refreshLabelNative(); }
+    }).catch(function(err){ console.log('push permissie-fout', err); });
+  }
+  // ---- gedeeld ----
+  function refreshLabel(){ if(isNative()) refreshLabelNative(); else refreshLabelWeb(); }
+  function togglePush(){ if(isNative()) togglePushNative(); else togglePushWeb(); }
   function injectButton(){
     var panel = document.querySelector('.ov .panel');
     if(!panel || document.getElementById('push-optin')) return;
@@ -737,7 +917,9 @@ tick(); setInterval(tick,10000);
     wrap.appendChild(btn); panel.appendChild(wrap);
     refreshLabel();
   }
-  window.addEventListener('load', function(){ setTimeout(injectButton, 400); });
+  function boot(){ if(isNative()) nativeInit(); injectButton(); }
+  window.addEventListener('load', function(){ setTimeout(boot, 400); });
+  document.addEventListener('deviceready', function(){ if(isNative()) nativeInit(); }, {once:true});
 })();
 </script>
 
