@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pushmelding versturen · Uitvaart-Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#4a1942; --plum2:#6C3D5C; --orange:#e8834a; --orange2:#c8622a;
+    --cream:#faf7f2; --cream2:#f3ece2; --ink:#2c1428; --muted:#8c7f88;
+    --line:#ece2ec; --soft:#f6eef4; --ok:#3c7a52; --okbg:#eaf3ec; --err:#b23a48; --errbg:#fbecee;
+    --sans:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --serif:'Lora',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);line-height:1.55;
+    background:radial-gradient(120% 70% at 85% -5%, #efe2ee 0%, transparent 55%), linear-gradient(160deg,#f5eff4,#efe7e0);
+    min-height:100vh;padding:28px 16px 60px}
+  .wrap{max-width:560px;margin:0 auto}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 18px 44px rgba(74,25,66,.07);margin-bottom:18px}
+  header.head{background:linear-gradient(135deg,var(--plum),var(--plum2));color:#fff;border-radius:22px;padding:26px 26px 24px;margin-bottom:18px;position:relative;overflow:hidden}
+  header.head h1{font-family:var(--serif);font-weight:600;font-size:1.7rem;line-height:1.15}
+  header.head p{color:#e6c6dd;font-size:.92rem;margin-top:6px}
+  .rules{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:.85rem;color:var(--plum2);margin-bottom:18px}
+  .rules b{color:var(--plum)}
+  .rules ul{margin:6px 0 0 18px}
+  .rules li{margin:3px 0}
+  label{display:block;font-weight:600;color:var(--plum);font-size:.9rem;margin:0 0 6px}
+  .hint{font-weight:400;color:var(--muted);font-size:.8rem}
+  input[type=text],input[type=url],input[type=password],textarea{
+    width:100%;font-family:var(--sans);font-size:1rem;color:var(--ink);
+    background:var(--cream);border:1.5px solid var(--line);border-radius:13px;padding:13px 15px;margin-bottom:18px;transition:border-color .15s,background .15s}
+  input:focus,textarea:focus{outline:none;border-color:var(--orange);background:#fff}
+  textarea{resize:vertical;min-height:90px}
+  .count{font-size:.76rem;color:var(--muted);text-align:right;margin:-14px 0 16px}
+  .preview-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .notif{display:flex;gap:12px;background:var(--cream2);border-radius:14px;padding:13px 15px;align-items:flex-start}
+  .notif .ico{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--plum),var(--plum2));flex:none;display:flex;align-items:center;justify-content:center}
+  .notif .ico svg{width:20px;height:20px}
+  .notif .nt{min-width:0}
+  .notif .nt .nh{font-weight:600;font-size:.92rem;color:var(--ink);word-wrap:break-word}
+  .notif .nt .nb{font-size:.86rem;color:#5a4a55;margin-top:2px;word-wrap:break-word}
+  .notif .nt .na{font-size:.72rem;color:var(--muted);margin-top:5px}
+  .btn{width:100%;font-family:var(--sans);font-weight:600;font-size:1.02rem;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:26px;padding:15px;
+    box-shadow:0 8px 20px rgba(200,98,42,.28);transition:transform .12s,box-shadow .12s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,98,42,.34)}
+  .btn:active{transform:translateY(0)}
+  .btn:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}
+  .msg{border-radius:13px;padding:14px 16px;font-size:.9rem;margin-top:16px;display:none}
+  .msg.show{display:block}
+  .msg.ok{background:var(--okbg);color:var(--ok);border:1px solid #cfe4d6}
+  .msg.err{background:var(--errbg);color:var(--err);border:1px solid #f0cdd2}
+  .msg b{font-weight:700}
+  details{margin-top:4px;border-top:1px solid var(--line);padding-top:16px}
+  summary{cursor:pointer;font-weight:600;color:var(--plum2);font-size:.9rem}
+  details p{font-size:.85rem;color:var(--muted);margin:10px 0}
+  .gen{background:var(--cream);border:1px dashed var(--line);border-radius:12px;padding:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;white-space:pre-wrap;word-break:break-all;color:var(--plum)}
+  .mini{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--orange2);background:none;border:1.5px solid var(--orange);border-radius:18px;padding:7px 14px;cursor:pointer;margin-top:10px}
+  footer{text-align:center;font-size:.78rem;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <h1>Pushmelding versturen</h1>
+    <p>In één keer naar iedereen — iPhone, iPad, Android én browser</p>
+  </header>
+
+  <div class="rules">
+    <b>Even rustig nalezen voor je verstuurt:</b>
+    <ul>
+      <li>Elke melding gaat naar <b>iedereen</b> en kan niet ongedaan worden gemaakt.</li>
+      <li>Houd het rustig: liever <b>één keer per week of minder</b>. Te vaak = mensen zetten meldingen uit.</li>
+      <li>Korte, vriendelijke titel. Geen hoofdletters of uitroeptekens-regen.</li>
+      <li>Stuur bij voorkeur tussen 9:00 en 20:00.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <label for="titel">Titel <span class="hint">— kort en duidelijk (max ~40 tekens)</span></label>
+    <input type="text" id="titel" maxlength="60" placeholder="Bijv. Nieuw artikel op Uitvaart-Platform" oninput="upd()">
+    <div class="count"><span id="ct">0</span>/60</div>
+
+    <label for="bericht">Bericht <span class="hint">— één of twee zinnen</span></label>
+    <textarea id="bericht" maxlength="160" placeholder="Bijv. Lees waarom een rouwauto drie strepen op de vlag heeft." oninput="upd()"></textarea>
+    <div class="count"><span id="cb">0</span>/160</div>
+
+    <label for="link">Link <span class="hint">— optioneel; opent bij een tik op de melding</span></label>
+    <input type="url" id="link" placeholder="https://uitvaart-platform.nl/artikelen/..." oninput="upd()">
+
+    <div class="preview-label">Zo ziet het er ongeveer uit</div>
+    <div class="notif">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 21a2 2 0 0 0 4 0" stroke-linecap="round"/></svg></div>
+      <div class="nt">
+        <div class="nh" id="pvh">Titel van je melding</div>
+        <div class="nb" id="pvb">Hier komt je bericht te staan.</div>
+        <div class="na" id="pva" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label for="ww">Verzend-wachtwoord</label>
+    <input type="password" id="ww" placeholder="Het wachtwoord dat je van Jeroen hebt" autocomplete="off">
+    <button class="btn" id="send" onclick="verstuur()">Versturen naar iedereen</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <footer>Uitvaart-Platform · interne verzendpagina · niet delen buiten de redactie</footer>
+</div>
+
+<script>
+  var WORKER = "https://uitvaart-push.weathered-dust-cab6.workers.dev";
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function upd(){
+    var t=val('titel'), b=val('bericht'), l=val('link');
+    document.getElementById('ct').textContent=document.getElementById('titel').value.length;
+    document.getElementById('cb').textContent=document.getElementById('bericht').value.length;
+    document.getElementById('pvh').textContent=t||'Titel van je melding';
+    document.getElementById('pvb').textContent=b||'Hier komt je bericht te staan.';
+    var a=document.getElementById('pva');
+    if(l){ a.style.display='block'; a.textContent='🔗 '+l; } else { a.style.display='none'; }
+  }
+  function show(type, html){
+    var m=document.getElementById('msg');
+    m.className='msg show '+type; m.innerHTML=html;
+  }
+  function verstuur(){
+    var t=val('titel'), b=val('bericht'), l=val('link'), ww=val('ww');
+    if(!t || !b){ show('err','Vul eerst een <b>titel</b> en een <b>bericht</b> in.'); return; }
+    if(!ww){ show('err','Vul het <b>verzend-wachtwoord</b> in.'); return; }
+    if(!confirm('Weet je het zeker?\n\nDeze melding gaat NU naar ALLE gebruikers en kan niet teruggehaald worden.\n\nTitel: '+t)) return;
+
+    var btn=document.getElementById('send');
+    btn.disabled=true; btn.textContent='Bezig met versturen…';
+    show('ok','Versturen…');
+
+    var payload={ title:t, body:b }; if(l) payload.url=l;
+    fetch(WORKER+'/send', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+ww },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){
+      if(r.status===403){ throw new Error('WW'); }
+      if(!r.ok){ throw new Error('HTTP '+r.status); }
+      return r.json().catch(function(){ return {}; });
+    })
+    .then(function(d){
+      var ios=(d&&typeof d.sentIos==='number')?d.sentIos:null;
+      var web=(d&&typeof d.sent==='number')?d.sent:null;
+      var extra='';
+      if(ios!==null||web!==null){
+        extra=' Bereikt: '+(ios!==null?ios+'× iPhone/iPad':'')+
+              ((ios!==null&&web!==null)?' en ':'')+
+              (web!==null?web+'× browser/Android':'')+'.';
+      }
+      show('ok','<b>Verzonden!</b> Je melding is verstuurd.'+extra);
+      document.getElementById('ww').value='';
+    })
+    .catch(function(e){
+      if(e.message==='WW'){ show('err','Het <b>wachtwoord klopt niet</b>. Controleer het en probeer opnieuw.'); }
+      else { show('err','Er ging iets mis ('+e.message+'). Controleer je internet en of deze pagina op de juiste plek staat. Lukt het niet? Vraag Jeroen.'); }
+    })
+    .then(function(){
+      btn.disabled=false; btn.textContent='Versturen naar iedereen';
+    });
+  }
+  upd();
+</script>
+</body>
+</html>
