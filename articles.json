@@ -1,15 +1,22 @@
 [
   {
-    "t": "Uitvaart Platform",
+    "t": "Wat gebeurt er met je auto na een overlijden? Dit moet je als nabestaande weten",
+    "s": "https://uitvaart-platform.nl/artikelen/wat-gebeurt-er-met-de-auto-na-mijn-overlijden",
+    "i": "https://app.uitvaart-platform.nl/_images/21369/pexels-negativespace-97075.jpg?w=920&amp;fm=jpeg",
+    "c": "",
+    "d": ""
+  },
+  {
+    "t": "Te laat komen op een uitvaart: wat doe je en wat is de etiquette?",
     "s": "https://uitvaart-platform.nl/artikelen/te-laat-komen-op-een-uitvaart-wat-doe-je-en-wat-is-de-etiquette",
-    "i": "data:image/png;base64,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",
+    "i": "https://app.uitvaart-platform.nl/_images/21371/pexels-jeshoots-4956.jpg?w=920&amp;fm=jpeg",
     "c": "",
     "d": ""
   },
   {
     "t": "Afscheid nemen van een gesloten kist: neem je dan wel echt afscheid?",
     "s": "https://uitvaart-platform.nl/artikelen/afscheid-nemen-van-een-gesloten-kist-neem-je-dan-wel-echt-afscheid",
-    "i": "https://app.uitvaart-platform.nl/_images/21337/pexels-mario-wallner-107470762-9634475.jpg?w=920&amp;fm=jpeg",
+    "i": "https://app.uitvaart-platform.nl/_images/21337/pexels-mario-wallner-107470762-9634475.jpg?w=916&amp;fm=jpeg",
     "c": "",
     "d": ""
   },
@@ -45,13 +52,6 @@
     "t": "Meerderheid Nederlanders ziet hogere erfbelasting voor grote erfenissen wel zitten",
     "s": "https://uitvaart-platform.nl/artikelen/meerderheid-nederlanders-ziet-hogere-erfbelasting-voor-grote-erfenissen-wel-zitten",
     "i": "https://app.uitvaart-platform.nl/_images/21280/pexels-jakubzerdzicki-29262989.jpg?w=916&amp;fm=jpeg",
-    "c": "",
-    "d": ""
-  },
-  {
-    "t": "Uitvaart-Inside viert vierjarig bestaan met groot nieuws: de zesde editie is in de maak",
-    "s": "https://uitvaart-platform.nl/artikelen/uitvaart-inside-viert-vierjarig-bestaan-met-groot-nieuws-de-zesde-editie-is-in-de-maak",
-    "i": "https://app.uitvaart-platform.nl/_images/21278/WhatsApp-Image-2026-07-08-at-10.51.01.jpeg?w=916&amp;fm=jpeg",
     "c": "",
     "d": ""
   }
