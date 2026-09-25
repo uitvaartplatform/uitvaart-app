@@ -485,7 +485,7 @@ var SECTIONS={
    {l:'Alle evenementen', s:'Bekijk de agenda', p:'/evenementen'}
  ]},
  b2b:{title:'Voor professionals', icon:'b2b', sub:'Word zichtbaar bij een groot publiek.', intro:'Sluit je aan bij het grootste uitvaartplatform van Nederland.', cta:true, items:[
-   {l:'Zakelijke bedrijvengids', s:'Jouw organisatie in de app', p:'/b2b/bedrijvengids'},
+   {l:'Zakelijke bedrijvengids', s:'Jouw organisatie in de app', p:'/bedrijvengids'},
    {l:'B2B netwerkplatform', s:'Het zakelijke netwerk', p:'/b2b-netwerkplatform'},
    {l:'Uitvaartgids voor professionals', s:'Voor de vakgenoot', p:'/uitvaartgids-voor-professionals'},
    {l:'Zakelijke diensten', s:'Foto, film, marketing en meer', p:'/zakelijke-diensten'},
@@ -503,7 +503,7 @@ var SECTIONS={
  ]}
 };
 
-// Bedrijvengids categorieen (echte URL\u0027s /bedrijven/c/<slug>)
+// Bedrijvengids categorieen (echte URL\u0027s /bedrijven/<slug>, site 3.0)
 var POP=[['Uitvaartondernemingen','uitvaartondernemingen'],['Rouwbegeleiding en nazorg','rouwbegeleiding-en-nazorg'],['Bloemen','bloemen'],['Fotograaf','fotograaf'],['Rouwvervoer','rouwvervoer'],['Kisten en manden','kisten-manden']];
 var CATS=[['Afscheidskunst','afscheidskunst'],['Asverstrooiing','asverstrooiing'],['Begraafplaats en crematorium','begraafplaats-crematorium'],['Bereikbaarheidsdiensten','bereikbaarheidsdiensten'],['Beveiliging','beveiliging'],['Bloemen','bloemen'],['Boedelruiming en ontruiming','boedelruiming-ontruiming'],['Brancheverenigingen','brancheverenigingen'],['Catering','catering'],['Dierenuitvaarten','dierenuitvaarten'],['Dragers','dragers'],['Erfrecht','erfrecht'],['Familiemediation','familiemediation'],['Fotograaf','fotograaf'],['Geurbeleving','geurbeleving'],['Goede doelen','goede-doelen'],['Graf en gedenktekens','graf-gedenktekens'],['Grafzorg','grafzorg'],['Herinneringsproducten','herinneringsproducten'],['Herinneringssieraden','herinneringssieraden'],['Juridisch advies','juridisch-advies'],['Keurmerken','keurmerken'],['Kinderuitvaarten','kinderuitvaarten'],['Kisten en manden','kisten-manden'],['Kleding','kleding'],['Livestreaming','livestreaming'],['Locatie','locatie'],['Makelaar','makelaar'],['Media','media'],['Muziek','muziek'],['Nalatenschap','nalatenschap'],['Opbaren en verzorging','opbaren-verzorging'],['Opleidingen','opleidingen'],['Reiniging','reiniging'],['Repatriering','repatriering'],['Resomeren','resomeren'],['Rituelen en tradities','rituelen-tradities'],['Rouwbegeleiding en nazorg','rouwbegeleiding-en-nazorg'],['Rouwcentra','rouwcentra'],['Rouwdrukwerk','rouwdrukwerk'],['Rouwvervoer','rouwvervoer'],['Software en administratie','software-administratie'],['Sprekers en schrijvers','sprekers-schrijvers'],['Stervensbegeleiding','stervensbegeleiding'],['Stichtingen','stichtingen'],['Styling en decoratie','styling-en-decoratie'],['Theater voorstelling','theater-voorstelling'],['Uitvaartbegeleiding','uitvaartbegeleiding'],['Uitvaartbenodigdheden','uitvaartbenodigdheden'],['Uitvaartondernemingen','uitvaartondernemingen'],['Uitvaarttips','uitvaarttips'],['Uitvaartverzekeringen','uitvaartverzekeringen'],['Unieke uitvaartlocaties','unieke-uitvaartlocaties'],['Urnen','urnen'],['Vervoer en logistiek','vervoer-en-logistiek'],['Videograaf','videograaf'],['Wade','wade'],['Zorginstellingen','zorginstellingen']];
 
@@ -521,8 +521,8 @@ var ARTS=[
  {t:'Waarom wordt een grafsteen pas later geplaatst op een graf?',c:'Graf en gedenktekens',d:'29 april 2026',s:'/artikelen/waarom-wordt-een-grafsteen-pas-later-geplaatst-op-een-graf',i:IMG+'19164/pexels-aksioart-8700691.jpg?w=600&fm=jpeg'}
 ];
 
-// Artikelcategorieen (filteren de artikelenpagina via ?category=<id>)
-var ARTCATS=[['Afscheidskunst',1],['Asverstrooiing',14],['Begraafplaats en crematorium',19],['Bereikbaarheidsdiensten',262],['Beveiliging',253],['Bloemen',25],['Boedelruiming en ontruiming',30],['Brancheverenigingen',259],['Catering',34],['Dierenuitvaarten',38],['Dragers',43],['Erfrecht',47],['Familiemediation',291],['Fotograaf',60],['Geurbeleving',256],['Goede doelen',72],['Graf en gedenktekens',63],['Grafzorg',68],['Herinneringsproducten',73],['Herinneringssieraden',9],['Juridisch advies',78],['Keurmerken',258],['Kinderuitvaarten',83],['Kisten en manden',91],['Kleding',108],['Livestreaming',120],['Locatie',112],['Makelaar',122],['Media',126],['Muziek',132],['Nalatenschap',95],['Opbaren en verzorgen',143],['Opleidingen',149],['Reiniging',152],['Repatriering',293],['Resomeren',155],['Rituelen en tradities',275],['Rouwbegeleiding en nazorg',156],['Rouwcentra',162],['Rouwdrukwerk',167],['Rouwvervoer',172],['Software en administratie',182],['Sprekers en schrijvers',188],['Stervensbegeleiding',192],['Stichtingen',257],['Styling en decoratie',198],['Theater voorstelling',288],['Uitvaartbegeleiding',285],['Uitvaartbenodigdheden',290],['Uitvaartondernemingen',202],['Uitvaarttips',273],['Uitvaartverzekeringen',216],['Unieke uitvaartlocaties',210],['Urnen',219],['Vervoer en logistiek',227],['Videograaf',231],['Wade',235],['Zorginstellingen',239]];
+// Artikelcategorieen (filteren de artikelenpagina via ?categorie=<slug>, site 3.0)
+var ARTCATS=[['Afscheidskunst','afscheidskunst'],['Asverstrooiing','asverstrooiing'],['Begraafplaats en crematorium','begraafplaats-crematorium'],['Beveiliging','beveiliging'],['Bloemen','bloemen'],['Boedelruiming en ontruiming','boedelruiming-ontruiming'],['Catering','catering'],['Dierenuitvaarten','dierenuitvaarten'],['Dragers','dragers'],['Erfrecht','erfrecht'],['Familiemediation','familiemediation'],['Fotograaf','fotograaf'],['Geurbeleving','geurbeleving'],['Goede doelen','goede-doelen'],['Graf en gedenktekens','graf-gedenktekens'],['Grafzorg','grafzorg'],['Herinneringsproducten','herinneringsproducten'],['Herinneringssieraden','herinneringssieraden'],['Juridisch advies','juridisch-advies'],['Kinderuitvaarten','kinderuitvaarten'],['Kisten en manden','kisten-manden'],['Kleding','kleding'],['Livestreaming','livestreaming'],['Locatie','locatie'],['Makelaar','makelaar'],['Muziek','muziek'],['Nalatenschap','nalatenschap'],['Opbaren en verzorgen','opbaren-verzorging'],['Repatriering','repatriering'],['Resomeren','resomeren'],['Rituelen en tradities','rituelen-tradities'],['Rouwbegeleiding en nazorg','rouwbegeleiding-en-nazorg'],['Rouwcentra','rouwcentra'],['Rouwdrukwerk','rouwdrukwerk'],['Rouwvervoer','rouwvervoer'],['Software en administratie','software-administratie'],['Sprekers en schrijvers','sprekers-schrijvers'],['Stervensbegeleiding','stervensbegeleiding'],['Stichtingen','stichtingen'],['Styling en decoratie','styling-en-decoratie'],['Uitvaartbegeleiding','uitvaartbegeleiding'],['Uitvaartondernemingen','uitvaartondernemingen'],['Uitvaarttips','uitvaarttips'],['Uitvaartverzekeringen','uitvaartverzekeringen'],['Unieke uitvaartlocaties','unieke-uitvaartlocaties'],['Urnen','urnen'],['Vervoer en logistiek','vervoer-en-logistiek'],['Videograaf','videograaf'],['Wade','wade'],['Zorginstellingen','zorginstellingen']];
 
 // menu structuur
 var MENU=[['home','Start','over'],['regelen','Uitvaart regelen','regelen'],['tools','Tools en hulpmiddelen','tools'],['kennis','Kennisbank','kennis'],['artikelen','Artikelen','book'],['gids','Bedrijvengids','gids'],['rouw','Rouw en steun','rouw'],['erf','Nalatenschap en erfrecht','erf'],['agenda','Agenda','agenda'],['uitgaves','Onze uitgaves','uitgaves'],['b2b','Voor professionals','b2b'],['over','Over ons','over']];
@@ -590,7 +590,7 @@ function renderHub(key){
   h+='<div class="pad">';
   if(sec.intro) h+='<p class="intro">'+sec.intro+'</p>';
   if(sec.cta){
-    h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Jouw organisatie in de app</h3><p>Bereik nabestaanden op het moment dat zij een specialist zoeken. Meld je aan en word zichtbaar.</p><a class="btn" href="'+u('/account')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
+    h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Jouw organisatie in de app</h3><p>Bereik nabestaanden op het moment dat zij een specialist zoeken. Meld je aan en word zichtbaar.</p><a class="btn" href="'+u('/registreren?soort=ondernemer')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
   }
   sec.items.forEach(function(it){ it.ic=sec.icon; h+=rowHtml(it); });
   h+='</div>';
@@ -603,12 +603,12 @@ function renderGids(){
   h+='<div class="pad">';
   h+='<div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg><span>Zoek een categorie of specialist</span></div>';
   h+='<div class="sect-t">Populair</div><div class="cats">';
-  POP.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/c/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  POP.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
   h+='</div>';
   h+='<div class="sect-t">Alle categorieen</div><div class="cats">';
-  CATS.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/c/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
+  CATS.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
   h+='</div>';
-  h+='<div class="b2b" style="margin-top:18px"><span class="bfwm">'+BFLY+'</span><h3>Hier ook vindbaar zijn?</h3><p>Zet jouw organisatie in de gids en word gevonden door nabestaanden.</p><a class="btn" href="'+u('/account')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
+  h+='<div class="b2b" style="margin-top:18px"><span class="bfwm">'+BFLY+'</span><h3>Hier ook vindbaar zijn?</h3><p>Zet jouw organisatie in de gids en word gevonden door nabestaanden.</p><a class="btn" href="'+u('/registreren?soort=ondernemer')+'" target="_blank" rel="noopener">Aanmelden</a></div>';
   h+='</div>';
   document.getElementById('scr-gids').innerHTML=h;
 }
@@ -633,7 +633,7 @@ function renderArtikelen(){
   h+='<a class="btn wide" href="'+u('/artikelen')+'" target="_blank" rel="noopener">'+I.ext+' Alle artikelen bekijken</a>';
   h+='<div class="sect-t">Blader per categorie</div>';
   h+='<div class="acats">';
-  ARTCATS.forEach(function(c){ h+='<a class="achip" onclick="openExt(\''+u('/artikelen?category='+c[1])+'\')">'+c[0]+'</a>'; });
+  ARTCATS.forEach(function(c){ h+='<a class="achip" onclick="openExt(\''+u('/artikelen?categorie='+c[1])+'\')">'+c[0]+'</a>'; });
   h+='</div>';
   h+='</div>';
   document.getElementById('scr-artikelen').innerHTML=h;
@@ -645,7 +645,7 @@ function renderUitgaves(){
   h+='<div class="pad">';
   h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Een tastbaar dossier om al je wensen en gegevens samen vast te leggen voor je nabestaanden.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
   h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid en rouw, met verhalen, inspiratie en achtergrond uit de branche.','https://uitvaart-inside.nl/bestellen','Bestel het magazine');
-  h+='<button class="row" onclick="openExt(\''+u('/onze-producten')+'\')"><span class="ic">'+I.uitgaves+'</span><span class="tx"><h3>Het verhaal achter onze uitgaves</h3><p>Hoe en waarom we ze maken</p></span><span class="ext">'+I.ext+'</span></button>';
+  h+='<button class="row" onclick="openExt(\''+u('/winkel')+'\')"><span class="ic">'+I.uitgaves+'</span><span class="tx"><h3>Het verhaal achter onze uitgaves</h3><p>Hoe en waarom we ze maken</p></span><span class="ext">'+I.ext+'</span></button>';
   h+='</div>';
   document.getElementById('scr-uitgaves').innerHTML=h;
 }
