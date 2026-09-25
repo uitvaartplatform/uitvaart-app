@@ -772,7 +772,7 @@ function renderCarousel(){
   }
   // automatische verversing: haal de actuele lijst op van hetzelfde domein
   try{
-    fetch('./articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length){ ARTS=j; carBuild(j); renderArtikelen(); } }).catch(function(){});
+    fetch('https://uitvaart-platform.app/articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length){ ARTS=j; carBuild(j); renderArtikelen(); } }).catch(function(){});
   }catch(e){}
 }
 
