@@ -94,6 +94,8 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
 .prod.tpg .bk{background:linear-gradient(135deg,var(--plum),var(--plum2))}
 .prod.ui .bk{background:linear-gradient(135deg,var(--orange),var(--orange2))}
 .prod .bk svg{width:28px;height:28px}
+.prod .bk{position:relative;overflow:hidden;height:90px}
+.prod .bk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .prod .c{flex:1;min-width:0}
 .prod h3{font-size:.96rem;font-weight:600}
 .prod .pr{font-size:.8rem;font-weight:700;color:var(--orange2);margin:3px 0 6px}
@@ -286,6 +288,7 @@ body{font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialias
   .screen{border-radius:0}
   .island{display:none}
   .status{height:env(safe-area-inset-top,18px);padding-bottom:0}
+  .status>*{visibility:hidden}
 }
 
 /* ===== APP-MODUS: schermvullend op een echt toestel (telefoon EN iPad/tablet) =====
@@ -298,6 +301,11 @@ body.app .phone{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;
 body.app .screen{border-radius:0}
 body.app .island{display:none}
 body.app .status{height:env(safe-area-inset-top,0);min-height:0;padding-bottom:0}
+/* Op een echt toestel toont de telefoon zelf de tijd en batterij: de nagebootste
+   statusbalk blijft hooguit een lege veilige-zone-ruimte. In de native iOS-app
+   (contentInset "always") houdt iOS die ruimte al zelf vrij, dus daar helemaal weg. */
+body.app .status>*{visibility:hidden}
+body.native .status{display:none}
 
 @media (pointer:coarse) and (min-width:461px){
   body{padding:0;background:var(--cream);display:block}
@@ -306,6 +314,7 @@ body.app .status{height:env(safe-area-inset-top,0);min-height:0;padding-bottom:0
   .screen{border-radius:0}
   .island{display:none}
   .status{height:env(safe-area-inset-top,0);min-height:0;padding-bottom:0}
+  .status>*{visibility:hidden}
 }
 
 /* ===== iPad / tablet-opmaak: de bredere ruimte netjes benutten =====
@@ -579,8 +588,11 @@ function renderHome(){
 function artCard(a){
   return '<a class="artcard" onclick="openExt(\''+u(a.s)+'\')"><div class="img" style="background-image:url(\''+a.i+'\')"><span class="cat">'+a.c+'</span></div><div class="c"><h3>'+a.t+'</h3><div class="date">'+a.d+'</div></div></a>';
 }
+// Covers: vervang het bestand op GitHub en elke app toont direct de nieuwe editie
+var COVERS={tpg:'https://uitvaart-platform.app/cover-tpg.jpg', ui:'https://uitvaart-platform.app/cover-ui.jpg'};
 function prodCard(cls,title,kind,desc,url,btn){
-  return '<div class="prod '+cls+'"><div class="bk">'+I.book+'</div><div class="c"><h3>'+title+'</h3><div class="pr">'+kind+'</div><p>'+desc+'</p><a class="btn" href="'+url+'" target="_blank" rel="noopener">'+I.ext+' '+btn+'</a></div></div>';
+  var cov=COVERS[cls]?'<img src="'+COVERS[cls]+'" alt="Cover '+title+'" loading="lazy" onerror="this.remove()">':'';
+  return '<div class="prod '+cls+'"><div class="bk">'+I.book+cov+'</div><div class="c"><h3>'+title+'</h3><div class="pr">'+kind+'</div><p>'+desc+'</p><a class="btn" href="'+url+'" target="_blank" rel="noopener">'+I.ext+' '+btn+'</a></div></div>';
 }
 
 // ===== HUB =====
@@ -601,6 +613,7 @@ function renderHub(key){
 function renderGids(){
   var h='<div class="hd"><div class="hrow"><span class="bf">'+BFLY+'</span><div><h1>Bedrijvengids</h1><div class="sub">De juiste specialist bij jou in de buurt</div></div></div></div>';
   h+='<div class="pad">';
+  h+='<div class="b2b" style="margin:0 0 18px"><span class="bfwm">'+BFLY+'</span><h3>Het Vlinderkompas</h3><p>Vertel wat er speelt en het kompas wijst je de weg naar de juiste specialist.</p><a class="btn" onclick="openExt(\''+u('/bedrijvengids')+'\')">Start het kompas</a></div>';
   h+='<div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg><span>Zoek een categorie of specialist</span></div>';
   h+='<div class="sect-t">Populair</div><div class="cats">';
   POP.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
@@ -788,6 +801,7 @@ function setAppMode(){
     var standalone = mm('(display-mode: standalone)').matches || mm('(display-mode: fullscreen)').matches || window.navigator.standalone === true;
     var coarse = mm('(pointer: coarse)').matches;
     if(nativeApp || standalone || coarse){ document.body.classList.add('app'); }
+    if(nativeApp){ document.body.classList.add('native'); }
   }catch(e){}
 }
 setAppMode();
