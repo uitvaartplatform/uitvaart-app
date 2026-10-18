@@ -432,29 +432,42 @@ var I={
 function u(p){ return p.indexOf('http')===0 ? p : SITE+p; }
 var SECTIONS={
  regelen:{title:'Uitvaart regelen', icon:'regelen', sub:'Stap voor stap, op je eigen tempo.', intro:'Alles om een uitvaart te regelen, van stappenplan tot kosten en verzekering.', items:[
+   {l:'Waar begin ik', s:'Je eerste stappen op een rij', p:'/waar-begin-ik'},
    {l:'Compleet stappenplan', s:'Wat regelen na een overlijden', p:'/wat-regelen-na-overlijden-compleet-stappenplan'},
    {l:'Stappenplan per situatie', s:'Toegespitst op jouw situatie', p:'/uitvaart-stappenplan-categorie'},
    {l:'Uitvaartvormen', s:'Cremeren, begraven, natuur en meer', p:'/uitvaartvormen'},
    {l:'Uitvaart keuzehulp', s:'Ontdek wat bij je past', p:'/uitvaart-keuzehulp'},
    {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', p:'/uitvaart-matchmaker'},
    {l:'Uitvaartkosten', s:'Wat kost een uitvaart', p:'/uitvaartkosten'},
-   {l:'Kostenvergelijker', s:'Vergelijk per regio', p:'/uitvaart-kostenvergelijker'},
+   {l:'Wat mag je zelf regelen', s:'Meer dan je denkt', p:'/zelf-regelen'},
+   {l:'Een offerte begrijpen', s:'Zo lees je een uitvaartofferte', p:'/offerte-begrijpen'},
+   {l:'Grafrechten per gemeente', s:'Tarieven in jouw gemeente', p:'/grafrechten-per-gemeente'},
+   {l:'Kosten en vergoedingen', s:'Waar je recht op hebt', p:'/kosten-vergoedingen'},
    {l:'Wat kost wat bij een uitvaart', s:'Alle posten uitgelegd', p:'/wat-kost-wat-bij-een-uitvaart'},
    {l:'Uitvaartverzekeringen', s:'Vergelijk de dekkingen', p:'/uitvaartverzekering'},
    {head:'Bijbehorende tools'},
-   {l:'Uitvaartkosten calculator PRO+', s:'Schat de kosten in 25 regio\u0027s', tool:TB+'uitvaartkosten-calculator.html'},
-   {l:'Compleet stappenplan', s:'Stap voor stap door alles heen', tool:TB+'stappenplan.html'},
-   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', tool:TB+'uitvaartmatcher.html'}
+   {l:'Uitvaartplanner', s:'Plan de uitvaart stap voor stap', p:'/uitvaartplanner'},
+   {l:'Stappenplan na overlijden', s:'Je persoonlijke takenlijst', p:'/stappenplan-na-overlijden'},
+   {l:'Uitvaartkosten calculator PRO', s:'Schat de kosten in jouw regio', p:'/uitvaartkosten-calculator-pro'},
+   {l:'Nabestaanden geldwijzer', s:'Je inkomen na een overlijden', p:'/nabestaanden-geldwijzer'}
  ]},
- tools:{title:'Tools en hulpmiddelen', icon:'tools', sub:'Reken en kies, gratis en privacyvriendelijk.', intro:'De volledige tools werken hier in de app. Er wordt niets opgeslagen.', items:[
-   {l:'Uitvaartkosten calculator PRO+', s:'Schat de kosten in 25 regio\u0027s', tool:TB+'uitvaartkosten-calculator.html'},
-   {l:'Compleet stappenplan', s:'Wat moet je regelen na een overlijden', tool:TB+'stappenplan.html'},
-   {l:'Erfbelasting calculator', s:'Bereken de erfbelasting 2026', tool:TB+'erfbelasting-calculator-pro.html'},
-   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
+ tools:{title:'Tools en hulpmiddelen', icon:'tools', sub:'Reken en kies, gratis en privacyvriendelijk.', intro:'Alle hulpmiddelen van het platform, altijd de nieuwste versie.', items:[
+   {l:'Vlinderkompas', s:'Vertel wat er speelt, het kompas wijst de weg', p:'/vlinderkompas'},
+   {head:'Uitvaart regelen'},
+   {l:'Uitvaartplanner', s:'Plan de uitvaart stap voor stap', p:'/uitvaartplanner'},
+   {l:'Stappenplan na overlijden', s:'Je persoonlijke takenlijst', p:'/stappenplan-na-overlijden'},
+   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', p:'/uitvaart-matchmaker'},
+   {l:'Uitvaartkosten calculator PRO', s:'Schat de kosten in jouw regio', p:'/uitvaartkosten-calculator-pro'},
+   {head:'Geld en nalatenschap'},
+   {l:'Nabestaanden geldwijzer', s:'Je inkomen na een overlijden', p:'/nabestaanden-geldwijzer'},
+   {l:'Erfbelasting calculator PRO', s:'Bereken de erfbelasting', p:'/erfbelasting-calculator-pro'},
+   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', p:'/erfdeel-berekenaar'},
+   {l:'Executeur-dashboard', s:'Alles voor de executeur op een rij', p:'/executeur-dashboard-pro'},
    {l:'Erfenis aanvaarden keuzehulp', s:'Aanvaarden, beneficiair of verwerpen', tool:TB+'beneficiair-aanvaarden-tool.html'},
-   {l:'Nabestaanden geldwijzer', s:'Je inkomen na een overlijden', tool:TB+'nabestaanden-financieel-cockpit-pro.html'},
-   {l:'Uitvaart matchmaker', s:'Vind de juiste ondernemer', tool:TB+'uitvaartmatcher.html'},
-   {l:'Interactieve rouwpagina', s:'Houd bij hoe het met je gaat', tool:TB+'Rouwpagina.html'}
+   {head:'Rouw'},
+   {l:'Rouw en verlies', s:'Dagboek, stemmingsmeter en kleine stappen', p:'/rouw-en-verlies'},
+   {l:'Mijn Afscheidsmaatje', s:'Rouwtool speciaal voor kinderen', p:'/afscheidsmaatje'},
+   {l:'Alle hulpmiddelen', s:'Het complete overzicht op de site', p:'/tools'}
  ]},
  kennis:{title:'Kennisbank', icon:'kennis', sub:'Antwoord op elke vraag rond afscheid.', intro:'Een van de grootste kennisbanken van de branche, altijd actueel.', items:[
    {l:'Veelgestelde vragen', s:'Honderden vragen beantwoord', p:'/veelgestelde-vragen'},
@@ -465,18 +478,20 @@ var SECTIONS={
    {l:'Uitvaart per plaats', s:'Informatie in jouw regio', p:'/uitvaart-per-plaats'},
    {l:'Begraafplaatsen Nederland', s:'Vind een begraafplaats', p:'/begraafplaatsen-nederland'},
    {l:'Rouw atlas wereldwijd', s:'Rouwgebruiken over de wereld', p:'/rouw-atlas'},
-   {l:'Bekende Nederlanders', s:'Rustplaatsen van bekenden', p:'/bekende-nederlanders-rustplaats'},
+   {l:'Alle onderwerpen', s:'De hele kennisbank op een rij', p:'/onderwerpen'},
+   {l:'Nieuws', s:'Actueel uit de uitvaartwereld', p:'/nieuws'},
    {l:'Alle artikelen', s:'Nieuws en tips, dagelijks bijgewerkt', screen:'artikelen'}
  ]},
  rouw:{title:'Rouw en steun', icon:'rouw', sub:'Je hoeft het niet alleen te dragen.', intro:'Rust en steun rond verlies, in je eigen tempo.', items:[
    {l:'Rouwverwerking', s:'Omgaan met verlies', p:'/rouwverwerking'},
-   {l:'Rouwverwerking per doelgroep', s:'Voor kinderen, jongeren en meer', p:'/rouw-per-doelgroep'},
+   {l:'Rouw en verlies', s:'Alles over rouw op een plek', p:'/rouw'},
    {l:'Kosten van rouw', s:'De minder zichtbare kant', p:'/kosten-van-rouw'},
    {l:'Rouw atlas wereldwijd', s:'Rouwgebruiken over de wereld', p:'/rouw-atlas'},
    {l:'Palliatieve zorg en hospice', s:'Zorg in de laatste fase', p:'/palliatieve-zorg'},
    {head:'Hulpmiddelen'},
-   {btn:true, l:'Open de interactieve rouwpagina', tool:TB+'Rouwpagina.html'},
-   {l:'Mijn Afscheidsmaatje', s:'Rouwtool speciaal voor kinderen', tool:TB+'kinderen-afscheid-tool.html'}
+   {l:'Rouw en verlies (tool)', s:'Dagboek, stemmingsmeter en kleine stappen', p:'/rouw-en-verlies'},
+   {l:'Mijn Afscheidsmaatje', s:'Rouwtool speciaal voor kinderen', p:'/afscheidsmaatje'},
+   {l:'Rouwbegeleiders', s:'Vind steun in de bedrijvengids', p:'/bedrijven/rouwbegeleiding-en-nazorg'}
  ]},
  erf:{title:'Nalatenschap en erfrecht', icon:'erf', sub:'Erfenis, testament en de financiele kant.', intro:'Begrijp je rechten en plichten rond de nalatenschap.', items:[
    {l:'Nalatenschap en erfrecht', s:'De basis uitgelegd', p:'/nalatenschap-erfrecht'},
@@ -486,17 +501,21 @@ var SECTIONS={
    {l:'Digitale nalatenschap', s:'Accounts en wachtwoorden', p:'/digitale-nalatenschap'},
    {l:'Wat als scenario\u0027s', s:'Doordenk je situatie', p:'/wat-als-scenarios'},
    {head:'Bijbehorende tools'},
-   {l:'Erfbelasting calculator', s:'Bereken de erfbelasting', tool:TB+'erfbelasting-calculator-pro.html'},
-   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', tool:TB+'erfdeel-berekenaar.html'},
+   {l:'Erfbelasting calculator PRO', s:'Bereken de erfbelasting', p:'/erfbelasting-calculator-pro'},
+   {l:'Erfdeel berekenaar', s:'Verdeel volgens het erfrecht', p:'/erfdeel-berekenaar'},
+   {l:'Executeur-dashboard', s:'Alles voor de executeur op een rij', p:'/executeur-dashboard-pro'},
+   {l:'Nabestaanden geldwijzer', s:'Je inkomen na een overlijden', p:'/nabestaanden-geldwijzer'},
    {l:'Erfenis aanvaarden keuzehulp', s:'Maak een onderbouwde keuze', tool:TB+'beneficiair-aanvaarden-tool.html'}
  ]},
  agenda:{title:'Agenda', icon:'agenda', sub:'Bijeenkomsten en evenementen.', intro:'Wat er speelt rond afscheid en rouw.', items:[
-   {l:'Alle evenementen', s:'Bekijk de agenda', p:'/evenementen'}
+   {l:'Brancheagenda', s:'Bekijk alle bijeenkomsten', p:'/agenda'}
  ]},
  b2b:{title:'Voor professionals', icon:'b2b', sub:'Word zichtbaar bij een groot publiek.', intro:'Sluit je aan bij het grootste uitvaartplatform van Nederland.', cta:true, items:[
    {l:'Zakelijke bedrijvengids', s:'Jouw organisatie in de app', p:'/bedrijvengids'},
    {l:'B2B netwerkplatform', s:'Het zakelijke netwerk', p:'/b2b-netwerkplatform'},
-   {l:'Uitvaartgids voor professionals', s:'Voor de vakgenoot', p:'/uitvaartgids-voor-professionals'},
+   {l:'Adverteermogelijkheden', s:'Platform, magazine en dossier', p:'/adverteermogelijkheden'},
+   {l:'Uitvaartmasterclass', s:'Opleidingen voor de branche', p:'/uitvaartmasterclass'},
+   {l:'Uitvaart Draaiboek Pro', s:'Het draaiboek voor ondernemers', p:'/uitvaartdraaiboek-pro'},
    {l:'Zakelijke diensten', s:'Foto, film, marketing en meer', p:'/zakelijke-diensten'},
    {l:'Adverteren', s:'Mogelijkheden en tarieven', p:'/adverteren'}
  ]},
@@ -561,6 +580,7 @@ function renderHome(){
   var h='';
   h+='<div class="hd"><div class="hrow"><span class="bf">'+BFLY+'</span><div><h1>Uitvaart-Platform</h1><div class="sub">Alles rond afscheid, rouw en nalatenschap</div></div><button class="menu" onclick="openMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button></div></div>';
   h+='<div class="pad">';
+  h+='<div class="b2b" style="margin:0 0 18px"><span class="bfwm">'+BFLY+'</span><h3>Het Vlinderkompas</h3><p>Vertel in je eigen woorden wat er speelt. Het kompas wijst je de weg.</p><a class="btn" onclick="openExt(\''+u('/vlinderkompas')+'\')">Start het kompas</a></div>';
   h+='<div class="sect-t">Waar kunnen we mee helpen</div>';
   h+='<div class="grid2">';
   [['regelen','Uitvaart regelen','Stappenplan en kosten'],['tools','Tools','Reken en kies'],['kennis','Kennisbank','500+ vragen'],['gids','Bedrijvengids','Vind een specialist'],['rouw','Rouw en steun','Ook voor kinderen'],['erf','Nalatenschap','Erfrecht en erfenis']].forEach(function(t){
@@ -573,8 +593,8 @@ function renderHome(){
   h+='<div class="carousel" id="carousel"><div class="car-track" id="car-track"></div><div class="car-dots" id="car-dots"></div></div>';
   // uitgaves
   h+='<div class="sect-t">Onze uitgaves</div>';
-  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Leg samen alles vast voor je nabestaanden, een tastbaar naslagwerk.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
-  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid, met verhalen, inspiratie en achtergrond.','https://uitvaart-inside.nl/bestellen','Bestel het magazine');
+  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Leg samen alles vast voor je nabestaanden, een tastbaar naslagwerk.',SITE+'/winkel/the-perfect-goodbye','Bestel het dossier');
+  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid, met verhalen, inspiratie en achtergrond.',SITE+'/winkel/uitvaart-inside-5e','Bestel het magazine');
   // b2b
   h+='<div class="sect-t">Voor ondernemers</div>';
   h+='<div class="b2b"><span class="bfwm">'+BFLY+'</span><h3>Zet jouw organisatie in de app</h3><p>Word zichtbaar bij duizenden nabestaanden die op zoek zijn naar de juiste specialist.</p><button class="btn" onclick="openHub(\'b2b\')">Meer weten</button></div>';
@@ -613,7 +633,7 @@ function renderHub(key){
 function renderGids(){
   var h='<div class="hd"><div class="hrow"><span class="bf">'+BFLY+'</span><div><h1>Bedrijvengids</h1><div class="sub">De juiste specialist bij jou in de buurt</div></div></div></div>';
   h+='<div class="pad">';
-  h+='<div class="b2b" style="margin:0 0 18px"><span class="bfwm">'+BFLY+'</span><h3>Het Vlinderkompas</h3><p>Vertel wat er speelt en het kompas wijst je de weg naar de juiste specialist.</p><a class="btn" onclick="openExt(\''+u('/bedrijvengids')+'\')">Start het kompas</a></div>';
+  h+='<div class="b2b" style="margin:0 0 18px"><span class="bfwm">'+BFLY+'</span><h3>Het Vlinderkompas</h3><p>Vertel wat er speelt en het kompas wijst je de weg naar de juiste specialist.</p><a class="btn" onclick="openExt(\''+u('/vlinderkompas')+'\')">Start het kompas</a></div>';
   h+='<div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg><span>Zoek een categorie of specialist</span></div>';
   h+='<div class="sect-t">Populair</div><div class="cats">';
   POP.forEach(function(c){ h+='<a class="catbtn" onclick="openExt(\''+u('/bedrijven/'+c[1])+'\')"><span class="d"></span>'+c[0]+'</a>'; });
@@ -656,8 +676,8 @@ function renderArtikelen(){
 function renderUitgaves(){
   var h='<div class="hd simple"><button class="back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div><h1>Onze uitgaves</h1><div class="sub">Tastbaar om te bewaren en door te geven</div></div></div>';
   h+='<div class="pad">';
-  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Een tastbaar dossier om al je wensen en gegevens samen vast te leggen voor je nabestaanden.','https://theperfectgoodbye.nl/bestellen','Bestel het dossier');
-  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid en rouw, met verhalen, inspiratie en achtergrond uit de branche.','https://uitvaart-inside.nl/bestellen','Bestel het magazine');
+  h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Een tastbaar dossier om al je wensen en gegevens samen vast te leggen voor je nabestaanden.',SITE+'/winkel/the-perfect-goodbye','Bestel het dossier');
+  h+=prodCard('ui','Uitvaart-Inside','Glossy magazine','Het magazine over afscheid en rouw, met verhalen, inspiratie en achtergrond uit de branche.',SITE+'/winkel/uitvaart-inside-5e','Bestel het magazine');
   h+='<button class="row" onclick="openExt(\''+u('/winkel')+'\')"><span class="ic">'+I.uitgaves+'</span><span class="tx"><h3>Het verhaal achter onze uitgaves</h3><p>Hoe en waarom we ze maken</p></span><span class="ext">'+I.ext+'</span></button>';
   h+='</div>';
   document.getElementById('scr-uitgaves').innerHTML=h;
