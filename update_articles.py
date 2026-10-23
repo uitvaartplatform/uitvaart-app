@@ -23,7 +23,8 @@ import urllib.request
 SITE = "https://uitvaart-platform.nl"
 FEED = SITE + "/artikelen-feed.json"
 BRON = SITE + "/artikelen"
-MAX_ARTIKELEN = 8
+MAX_ARTIKELEN = 8          # bij het uitlezen van de pagina (oude manier)
+MAX_PER_SOORT = 8          # uit de feed: zoveel nieuws en zoveel evergreen
 UITVOER = "articles.json"
 
 
@@ -65,8 +66,13 @@ def bruikbare_foto(url):
 
 # ---------------------------------------------------------------- 1. de feed
 def via_feed():
-    """Leest artikelen-feed.json van de nieuwe site. Geeft een lijst terug,
-    of None als de feed niet bestaat of niet klopt."""
+    """Leest artikelen-feed.json van de site. Geeft een lijst terug, of None als
+    de feed niet bestaat of niet klopt.
+
+    Versie 3 (okt 2026): de feed levert per artikel ook "type" ("nieuws" of
+    "evergreen") en "d" (publicatiedatum JJJJ-MM-DD). Die nemen we mee, zodat de
+    app "Laatste nieuws" en "Goed om te weten" apart kan tonen. Zonder type
+    (oude feed) geldt alles als nieuws, zoals voorheen."""
     try:
         ruw = haal_op(FEED)
         lijst = json.loads(ruw)
@@ -76,6 +82,7 @@ def via_feed():
         return None
 
     artikelen = []
+    teller = {"nieuws": 0, "evergreen": 0}
     for item in lijst:
         if not isinstance(item, dict):
             continue
@@ -84,11 +91,17 @@ def via_feed():
         foto = maak_absoluut(str(item.get("i") or item.get("foto") or ""))
         if not titel or "/artikelen/" not in link or not bruikbare_foto(foto):
             continue
-        artikelen.append({"t": titel, "s": link, "i": foto, "c": "", "d": ""})
-        if len(artikelen) >= MAX_ARTIKELEN:
-            break
+        soort = str(item.get("type") or "").strip().lower()
+        if soort not in ("nieuws", "evergreen"):
+            soort = "nieuws"
+        if teller[soort] >= MAX_PER_SOORT:
+            continue
+        datum = str(item.get("d") or "").strip()
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", datum):
+            datum = ""
+        artikelen.append({"t": titel, "s": link, "i": foto, "c": "", "d": datum, "type": soort})
+        teller[soort] += 1
 
-    # Alleen bruikbaar als de feed echt wat oplevert.
     return artikelen if artikelen else None
 
 
