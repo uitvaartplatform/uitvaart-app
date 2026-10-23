@@ -566,7 +566,35 @@ function rowHtml(it){
   else { onclick="openExt('"+u(it.p)+"')"; right=I.ext; }
   return '<button class="row" onclick="'+onclick+'"><span class="ic">'+(I[it.ic]||I.book)+'</span><span class="tx"><h3>'+it.l+'</h3>'+(it.s?'<p>'+it.s+'</p>':'')+'</span><span class="ext">'+right+'</span></button>';
 }
-window.openExt=function(url){ window.open(url,'_blank','noopener'); };
+// Aanpak B: pagina's van uitvaart-platform.nl openen in de app zelf (zelfde venster),
+// met ?bron=app zodat de site weet dat hij in de app draait en een terugknop toont.
+// Andere domeinen gaan zoals voorheen naar een apart venster.
+function isPlatformUrl(url){ try{ var h=new URL(url, location.href).hostname; return /(^|\.)uitvaart-platform\.nl$/.test(h); }catch(e){ return false; } }
+function metAppBron(url){ try{ var x=new URL(url, location.href); x.searchParams.set('bron','app'); return x.toString(); }catch(e){ return url; } }
+window.openExt=function(url){
+  if(isPlatformUrl(url)){ location.href=metAppBron(url); return; }
+  window.open(url,'_blank','noopener');
+};
+// Ook gewone links (<a target="_blank">) naar het platform in de app openen
+// Vanaf de website terug naar een vast scherm van de app: #scherm=regelen|tools|kennis|gids|start
+function openSchermUitHash(){
+  var m=(location.hash||'').match(/scherm=([a-z]+)/); if(!m) return;
+  var k=m[1];
+  try{
+    if(k==='gids' && window.openGids) openGids('tab');
+    else if((k==='regelen'||k==='tools'||k==='kennis') && window.openHub) openHub(k,'tab');
+    else if(window.goHome) goHome();
+  }catch(e){}
+  try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+}
+window.addEventListener('load', function(){ setTimeout(openSchermUitHash, 50); });
+window.addEventListener('hashchange', openSchermUitHash);
+document.addEventListener('click', function(e){
+  var a=e.target && e.target.closest ? e.target.closest('a[href]') : null;
+  if(!a) return;
+  var href=a.getAttribute('href')||'';
+  if(href.indexOf('http')===0 && isPlatformUrl(href)){ e.preventDefault(); window.openExt(href); }
+}, true);
 window.openTool=function(url,title){
   var back='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var h='<div class="hd simple"><button class="back" onclick="openHub(\'tools\',\'tab\')">'+back+'</button><div><h1>'+title+'</h1><div class="sub">Volledige tool, in de app</div></div></div>';
@@ -589,8 +617,10 @@ function renderHome(){
   });
   h+='</div>';
   // artikelen
-  h+='<div class="sect-t"><span>Nieuwste artikelen <span class="livebadge"><span class="livedot"></span>nieuw</span></span><a onclick="openScreen(\'artikelen\')">Alles</a></div>';
+  h+='<div class="sect-t"><span>Laatste nieuws <span class="livebadge"><span class="livedot"></span>nieuw</span></span><a onclick="openExt(\''+u('/nieuws')+'\')">Alles</a></div>';
   h+='<div class="carousel" id="carousel"><div class="car-track" id="car-track"></div><div class="car-dots" id="car-dots"></div></div>';
+  // goed om te weten (evergreen); verborgen zolang de feed nog geen evergreen-artikelen levert
+  h+='<div id="gtw-blok" style="display:none"><div class="sect-t"><span>Goed om te weten</span><a onclick="openExt(\''+u('/artikelen')+'\')">Alles</a></div><div class="hscroll" id="gtw"></div></div>';
   // uitgaves
   h+='<div class="sect-t">Onze uitgaves</div>';
   h+=prodCard('tpg','The Perfect Goodbye','Nabestaandendossier','Leg samen alles vast voor je nabestaanden, een tastbaar naslagwerk.',SITE+'/winkel/the-perfect-goodbye','Bestel het dossier');
@@ -647,11 +677,21 @@ function renderGids(){
 }
 
 // ===== ARTIKELEN =====
+// De feed levert per artikel type "nieuws" of "evergreen". Oudere feeds hebben geen type:
+// dan geldt alles als nieuws (zo werkt de app met de oude en de nieuwe feed).
+function alsNieuws(list){ return (list||[]).filter(function(a){ return !a.type || a.type==='nieuws'; }); }
+function alsEvergreen(list){ return (list||[]).filter(function(a){ return a.type==='evergreen'; }); }
+var MAANDEN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+function fmtDatum(d){
+  var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||''); if(!m) return d||'';
+  return parseInt(m[3],10)+' '+MAANDEN[parseInt(m[2],10)-1]+' '+m[1];
+}
+function escH(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function articleCard(a){
   var url=(a.s&&a.s.indexOf('http')===0)?a.s:u(a.s||'');
   var cat=a.c?'<span class="acat">'+a.c+'</span>':'';
   var img=a.i?'<div class="aimg">'+cat+'<img src="'+a.i+'" alt="" loading="lazy"></div>':'';
-  var dat=a.d?'<div class="ad">'+a.d+'</div>':'';
+  var dat=a.d?'<div class="ad">'+fmtDatum(a.d)+'</div>':'';
   return '<button class="acard" onclick="openExt(\''+url+'\')">'+img+'<div class="abody"><h3>'+a.t+'</h3>'+dat+'</div></button>';
 }
 function renderArtikelen(){
@@ -659,10 +699,17 @@ function renderArtikelen(){
   var h='<div class="hd simple"><button class="back" onclick="goHome()">'+back+'</button><div><h1>Artikelen</h1><div class="sub">Blader door onze artikelen</div></div></div>';
   h+='<div class="pad">';
   h+='<p class="intro">Lees onze artikelen over uitvaart, rouw en nalatenschap. Tik op een artikel om het te lezen op het platform.</p>';
-  h+='<div class="sect-t">Nieuwste artikelen</div>';
+  var nw=alsNieuws(ARTS), ev=alsEvergreen(ARTS);
+  h+='<div class="sect-t">Laatste nieuws</div>';
   h+='<div class="alist">';
-  ARTS.forEach(function(a){ h+=articleCard(a); });
+  nw.forEach(function(a){ h+=articleCard(a); });
   h+='</div>';
+  if(ev.length){
+    h+='<div class="sect-t">Goed om te weten</div>';
+    h+='<div class="alist">';
+    ev.forEach(function(a){ h+=articleCard(a); });
+    h+='</div>';
+  }
   h+='<a class="btn wide" href="'+u('/artikelen')+'" target="_blank" rel="noopener">'+I.ext+' Alle artikelen bekijken</a>';
   h+='<div class="sect-t">Blader per categorie</div>';
   h+='<div class="acats">';
@@ -787,7 +834,7 @@ function carBuild(list){
   list.forEach(function(a,i){
     var url=(a.s&&a.s.indexOf('http')===0)?a.s:SITE+(a.s||'');
     var cat=a.c?'<span class="car-cat">'+a.c+'</span>':'';
-    var dat=a.d?'<div class="d">'+a.d+'</div>':'';
+    var dat=a.d?'<div class="d">'+fmtDatum(a.d)+'</div>':'';
     h+='<div class="car-slide" onclick="openExt(\''+url+'\')"><div class="car-imgwrap"><img class="car-img" src="'+a.i+'" alt="" loading="lazy"><div class="car-shade"></div>'+cat+'<div class="car-txt"><h3>'+a.t+'</h3>'+dat+'</div></div></div>';
     dh+='<button class="car-dot'+(i===0?' act':'')+'" onclick="carGo('+i+')" aria-label="Artikel '+(i+1)+'"></button>';
   });
@@ -796,8 +843,25 @@ function carBuild(list){
   if(carTimer) clearInterval(carTimer);
   carTimer=setInterval(function(){ carGo(carI+1); },5000);
 }
+function renderGoedOmTeWeten(list){
+  var blok=document.getElementById('gtw-blok'), box=document.getElementById('gtw'); if(!blok||!box) return;
+  if(!list||!list.length){ blok.style.display='none'; return; }
+  var h='';
+  list.forEach(function(a){
+    var url=(a.s&&a.s.indexOf('http')===0)?a.s:SITE+(a.s||'');
+    var img=String(a.i||'').replace(/["'()\\<>\s]/g,'');
+    h+='<a class="artcard" onclick="openExt(\''+url+'\')"><div class="img" style="background-image:url(\''+img+'\')"></div><div class="c"><h3>'+escH(a.t)+'</h3></div></a>';
+  });
+  box.innerHTML=h; blok.style.display='';
+}
+function verwerkFeed(j){
+  ARTS=j;
+  carBuild(alsNieuws(j));
+  renderGoedOmTeWeten(alsEvergreen(j));
+  renderArtikelen();
+}
 function renderCarousel(){
-  carBuild(ARTS);
+  carBuild(alsNieuws(ARTS));
   var c=document.getElementById('carousel');
   if(c){
     c.addEventListener('mouseenter',function(){ if(carTimer){clearInterval(carTimer); carTimer=null;} });
@@ -805,7 +869,7 @@ function renderCarousel(){
   }
   // automatische verversing: haal de actuele lijst op van hetzelfde domein
   try{
-    fetch('https://uitvaart-platform.app/articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length){ ARTS=j; carBuild(j); renderArtikelen(); } }).catch(function(){});
+    fetch('https://uitvaart-platform.app/articles.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j&&j.length){ verwerkFeed(j); } }).catch(function(){});
   }catch(e){}
 }
 
@@ -926,7 +990,7 @@ tick(); setInterval(tick,10000);
     pn.addListener('pushNotificationActionPerformed', function(action){
       var data = action && action.notification && action.notification.data;
       var url = data && (data.url || data.link);
-      if(url && (''+url).indexOf('http')===0){ try{ window.open(url, '_blank', 'noopener'); }catch(e){} }
+      if(url && (''+url).indexOf('http')===0){ try{ window.openExt(url); }catch(e){} }
     });
   }
   function togglePushNative(){
@@ -951,7 +1015,43 @@ tick(); setInterval(tick,10000);
     wrap.appendChild(btn); panel.appendChild(wrap);
     refreshLabel();
   }
-  function boot(){ if(isNative()) nativeInit(); injectButton(); }
+  // ---- Automatische pushvraag (eigen kaart, daarna pas de systeemvraag) ----
+  var VRAAG_KEY='uvp-push-vraag';           // tijdstip waarop we het weer mogen vragen
+  var LATER_DAGEN=7;
+  function magVragen(){ try{ var t=parseInt(localStorage.getItem(VRAAG_KEY)||'0',10); return !t || Date.now()>=t; }catch(e){ return true; } }
+  function zetLater(){ try{ localStorage.setItem(VRAAG_KEY, String(Date.now()+LATER_DAGEN*864e5)); }catch(e){} }
+  function zetNooitMeer(){ try{ localStorage.setItem(VRAAG_KEY, '9999999999999'); }catch(e){} }
+  function moetVragen(){
+    if(!magVragen()) return Promise.resolve(false);
+    if(isNative()){
+      var pn=PN(); if(!pn || !pn.checkPermissions) return Promise.resolve(false);
+      return pn.checkPermissions().then(function(r){ return !!(r && r.receive!=='granted' && r.receive!=='denied'); }).catch(function(){ return false; });
+    }
+    if(!supported()) return Promise.resolve(false);
+    if(!document.body.classList.contains('app')) return Promise.resolve(false); // niet in de desktop-preview
+    return Promise.resolve(Notification.permission==='default');
+  }
+  function toonPushKaart(){
+    if(document.getElementById('push-kaart')) return;
+    var w=document.createElement('div'); w.id='push-kaart';
+    w.setAttribute('role','dialog'); w.setAttribute('aria-label','Meldingen ontvangen');
+    w.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:200;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(30,10,28,.35);display:flex;justify-content:center';
+    w.innerHTML='<div style="background:#faf7f2;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:22px 20px 18px;max-width:420px;width:100%;font-family:inherit">'
+      +'<div style="font-size:1.6rem;line-height:1;margin-bottom:10px">\uD83D\uDD14</div>'
+      +'<p style="font-size:1rem;font-weight:600;color:#4a1942;line-height:1.4;margin:0 0 16px">Wil je op de hoogte blijven van nieuwe artikelen en tips?</p>'
+      +'<div style="display:flex;gap:10px">'
+      +'<button id="push-ja" style="flex:1;border:0;border-radius:12px;padding:13px;background:#4a1942;color:#fff;font:inherit;font-weight:600;font-size:.95rem">Ja, graag</button>'
+      +'<button id="push-later" style="flex:1;border:1px solid #d9cdd6;border-radius:12px;padding:13px;background:#fff;color:#4a1942;font:inherit;font-weight:500;font-size:.95rem">Later</button>'
+      +'</div></div>';
+    document.body.appendChild(w);
+    function sluit(){ var k=document.getElementById('push-kaart'); if(k) k.remove(); }
+    document.getElementById('push-ja').onclick=function(){ zetNooitMeer(); sluit(); togglePush(); };
+    document.getElementById('push-later').onclick=function(){ zetLater(); sluit(); };
+  }
+  function planPushVraag(){
+    setTimeout(function(){ moetVragen().then(function(ja){ if(ja) toonPushKaart(); }); }, 2500);
+  }
+  function boot(){ if(isNative()) nativeInit(); injectButton(); planPushVraag(); }
   window.addEventListener('load', function(){ setTimeout(boot, 400); });
   document.addEventListener('deviceready', function(){ if(isNative()) nativeInit(); }, {once:true});
 })();
