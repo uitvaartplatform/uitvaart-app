@@ -1,5 +1,61 @@
 [
   {
+    "t": "Nieuwe zorgoptie voor Tholen",
+    "s": "https://uitvaart-platform.nl/artikelen/nieuwe-zorgoptie-voor-tholen",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/4b802f5f256f1a0ec9887f50.jpg",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
+    "t": "Lezing over laatste levensfase in bibliotheken",
+    "s": "https://uitvaart-platform.nl/artikelen/lezing-over-laatste-levensfase-in-bibliotheken",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/43e13df6d10513b3a7e4f139.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
+    "t": "Onderzoek: slechts 4% gebruikt AI bij uitvaart",
+    "s": "https://uitvaart-platform.nl/artikelen/onderzoek-slechts-4-gebruikt-ai-bij-uitvaart",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/f3acb7763aebef9300ce07d6.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
+    "t": "€300 miljard aan erfenissen op komst",
+    "s": "https://uitvaart-platform.nl/artikelen/300-miljard-aan-erfenissen-op-komst",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/f3958629d9a2093f4afe8865.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
+    "t": "Grafschennis op Rusthof: paranormale sessie voor de rechter",
+    "s": "https://uitvaart-platform.nl/artikelen/grafschennis-op-rusthof-paranormale-sessie-voor-de-rechter",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/7549c96aa8645509fc528d56.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
+    "t": "Stormschade aan graven: hoe zit het met de kosten?",
+    "s": "https://uitvaart-platform.nl/artikelen/stormschade-aan-graven-hoe-zit-het-met-de-kosten",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/f5da5e7d756917b2df6357e9.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "evergreen"
+  },
+  {
+    "t": "Oorlogsbegraafplaats Ysselsteyn: wie ligt hier begraven?",
+    "s": "https://uitvaart-platform.nl/artikelen/oorlogsbegraafplaats-ysselsteyn-wie-ligt-hier-begraven",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/51040c28e47a873a12b13d48.webp",
+    "c": "",
+    "d": "2026-10-27",
+    "type": "nieuws"
+  },
+  {
     "t": "Nederland kleinste begraafplaats",
     "s": "https://uitvaart-platform.nl/artikelen/nederland-kleinste-begraafplaats",
     "i": "https://uitvaart-platform.nl/foto/artikelen/7b412406e0607805384a755a.webp",
@@ -30,54 +86,6 @@
     "c": "",
     "d": "2026-10-26",
     "type": "evergreen"
-  },
-  {
-    "t": "Regel je testament online",
-    "s": "https://uitvaart-platform.nl/artikelen/regel-je-testament-online",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/a72ce596208d873d3563ff93.webp",
-    "c": "",
-    "d": "2026-10-26",
-    "type": "nieuws"
-  },
-  {
-    "t": "Grafrechten verlengen in Hollands Kroon",
-    "s": "https://uitvaart-platform.nl/artikelen/grafrechten-verlengen-in-hollands-kroon",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/d17df1d3085767b766593ea8.webp",
-    "c": "",
-    "d": "2026-10-26",
-    "type": "nieuws"
-  },
-  {
-    "t": "Allerzielen: een moment om dierbaren te herdenken",
-    "s": "https://uitvaart-platform.nl/artikelen/allerzielen-een-moment-om-dierbaren-te-herdenken",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/2aed4ec172a9ad44decb3e53.webp",
-    "c": "",
-    "d": "2026-10-26",
-    "type": "nieuws"
-  },
-  {
-    "t": "Vijf rouwauto's onder de hamer",
-    "s": "https://uitvaart-platform.nl/artikelen/rouwauto-s-onder-de-hamer",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/6b041555e91bff4c9406596c.webp",
-    "c": "",
-    "d": "2026-10-25",
-    "type": "nieuws"
-  },
-  {
-    "t": "Bloemenmarkt bij begraafplaats in Blankenberge",
-    "s": "https://uitvaart-platform.nl/artikelen/bloemenmarkt-bij-begraafplaats-in-blankenberge",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/ac2260c293bea31c8d9cf7df.jpg",
-    "c": "",
-    "d": "2026-10-25",
-    "type": "nieuws"
-  },
-  {
-    "t": "Laatste kans voor rondleiding Joodse Begraafplaats Oisterwijk",
-    "s": "https://uitvaart-platform.nl/artikelen/laatste-kans-voor-rondleiding-joodse-begraafplaats-oisterwij",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/942da915a0b7ffc53af707f4.jpg",
-    "c": "",
-    "d": "2026-10-25",
-    "type": "nieuws"
   },
   {
     "t": "Begraafplaatsen vol: wat nu met oude graven?",
@@ -117,14 +125,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/a70f03ca845a188bc208ea7c.webp",
     "c": "",
     "d": "2026-10-13",
-    "type": "evergreen"
-  },
-  {
-    "t": "Wat gebeurt er met je onderneming als je overlijdt?",
-    "s": "https://uitvaart-platform.nl/artikelen/wat-gebeurt-er-met-je-onderneming-als-je-overlijdt",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/a7b39e98ca7db41edd7cc9ae.webp",
-    "c": "",
-    "d": "2026-10-09",
     "type": "evergreen"
   }
 ]
