@@ -1,5 +1,53 @@
 [
   {
+    "t": "Día de los Muertos: hoe Mexico de doden viert",
+    "s": "https://uitvaart-platform.nl/artikelen/dia-de-los-muertos-hoe-mexico-de-doden-viert",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/7f7651b4cea0e8d5bda122ee.webp",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "nieuws"
+  },
+  {
+    "t": "Seance op begraafplaats: 58 nabestaanden doen aangifte",
+    "s": "https://uitvaart-platform.nl/artikelen/seance-op-begraafplaats-58-nabestaanden-doen-aangifte",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/2b42e3a675e556136e15f631.webp",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "nieuws"
+  },
+  {
+    "t": "PFAS op begraafplaats: bezoekers moeten handen wassen",
+    "s": "https://uitvaart-platform.nl/artikelen/pfas-op-begraafplaats-bezoekers-moeten-handen-wassen",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/c2e324734648e96edd86aa1f.webp",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "nieuws"
+  },
+  {
+    "t": "Notaris rekent € 2.117 voor verklaring van erfrecht: mag dat?",
+    "s": "https://uitvaart-platform.nl/artikelen/notaris-rekent-2-117-voor-verklaring-van-erfrecht-mag-dat",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/1a21f732622d64012cdb1447.webp",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "nieuws"
+  },
+  {
+    "t": "Rust voor later: regie over je uitvaart",
+    "s": "https://uitvaart-platform.nl/artikelen/rust-voor-later-regie-over-je-uitvaart",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/8cc0a6f4dc230190391bf3cf.jpg",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "nieuws"
+  },
+  {
+    "t": "Elektrische rouwauto voor duurzame uitvaarten",
+    "s": "https://uitvaart-platform.nl/artikelen/elektrische-rouwauto-voor-duurzame-uitvaarten",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/7f0d8d142bb9924e5de01cf4.webp",
+    "c": "",
+    "d": "2026-10-31",
+    "type": "evergreen"
+  },
+  {
     "t": "Erfgoedwandeling op begraafplaats",
     "s": "https://uitvaart-platform.nl/artikelen/erfgoedwandeling-op-begraafplaats",
     "i": "https://uitvaart-platform.nl/foto/artikelen/ff431ff7de08e7fa49b6e868.webp",
@@ -21,46 +69,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/b95c0387f95233427b8f88e7.webp",
     "c": "",
     "d": "2026-10-30",
-    "type": "nieuws"
-  },
-  {
-    "t": "Ook lachen hoort bij afscheid nemen",
-    "s": "https://uitvaart-platform.nl/artikelen/ook-lachen-hoort-bij-afscheid-nemen",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/9e2bc6962a8a5fa14ac63a7d.webp",
-    "c": "",
-    "d": "2026-10-29",
-    "type": "nieuws"
-  },
-  {
-    "t": "Oostenrijkse startup maakt AI voor afscheidsboodschappen",
-    "s": "https://uitvaart-platform.nl/artikelen/oostenrijkse-startup-maakt-ai-voor-afscheidsboodschappen",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/69498960db31bd8eb6d95958.webp",
-    "c": "",
-    "d": "2026-10-29",
-    "type": "nieuws"
-  },
-  {
-    "t": "Vergeten kindergraf krijgt alsnog een naam",
-    "s": "https://uitvaart-platform.nl/artikelen/vergeten-kindergraf-krijgt-alsnog-een-naam",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/762466b5ae23f736ed9a4a05.webp",
-    "c": "",
-    "d": "2026-10-29",
-    "type": "nieuws"
-  },
-  {
-    "t": "Internationale Dag van de Beroerte: herken de signalen",
-    "s": "https://uitvaart-platform.nl/artikelen/internationale-dag-van-de-beroerte-herken-de-signalen",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/7c63132c74f3a934f714568d.webp",
-    "c": "",
-    "d": "2026-10-29",
-    "type": "nieuws"
-  },
-  {
-    "t": "Euthanasie regelen: een wilsverklaring is niet genoeg",
-    "s": "https://uitvaart-platform.nl/artikelen/euthanasie-regelen-een-wilsverklaring-is-niet-genoeg",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/8b7622362a28524868c7937f.webp",
-    "c": "",
-    "d": "2026-10-28",
     "type": "nieuws"
   },
   {
@@ -117,14 +125,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/3bbd3176d4256516b59d33cf.webp",
     "c": "",
     "d": "2026-10-19",
-    "type": "evergreen"
-  },
-  {
-    "t": "Opslag na overlijden: spullen tijdelijk opslaan tot de nalatenschap geregeld is",
-    "s": "https://uitvaart-platform.nl/artikelen/opslag-na-overlijden-spullen-tijdelijk-opslaan",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/16966-pexels-karolina-grabowska-4506226.jpg",
-    "c": "",
-    "d": "2026-10-13",
     "type": "evergreen"
   }
 ]
