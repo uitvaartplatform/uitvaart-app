@@ -1,5 +1,37 @@
 [
   {
+    "t": "Sliedrecht onderzoekt komst elektrisch crematorium",
+    "s": "https://uitvaart-platform.nl/artikelen/sliedrecht-onderzoekt-komst-elektrisch-crematorium",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/17b3546c0dc358aae1f13e19.webp",
+    "c": "",
+    "d": "2026-11-14",
+    "type": "nieuws"
+  },
+  {
+    "t": "Papieren schenking onder druk: gevolgen voor nalatenschap",
+    "s": "https://uitvaart-platform.nl/artikelen/papieren-schenking-onder-druk-gevolgen-voor-nalatenschap",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/668ad45654e063d101b0886b.webp",
+    "c": "",
+    "d": "2026-11-14",
+    "type": "nieuws"
+  },
+  {
+    "t": "Erfbelasting: 50PLUS eist behoud voordeel",
+    "s": "https://uitvaart-platform.nl/artikelen/erfbelasting-50plus-eist-behoud-voordeel",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/9f3fb13a5a3a37511f40c460.webp",
+    "c": "",
+    "d": "2026-11-14",
+    "type": "nieuws"
+  },
+  {
+    "t": "Herbegraven na overlijden: wanneer mag dat?",
+    "s": "https://uitvaart-platform.nl/artikelen/herbegraven-na-overlijden-wanneer-mag-dat",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/a2a4a27e0597bd88017a2f39.webp",
+    "c": "",
+    "d": "2026-11-14",
+    "type": "evergreen"
+  },
+  {
     "t": "Hoe verzorgden de Egyptenaren hun doden?",
     "s": "https://uitvaart-platform.nl/artikelen/hoe-verzorgden-de-egyptenaren-hun-doden",
     "i": "https://uitvaart-platform.nl/foto/artikelen/f6a92e541d3dc22f3ab9f4a6.webp",
@@ -48,36 +80,12 @@
     "type": "nieuws"
   },
   {
-    "t": "Twaalf jaar cel en tbs na dodelijke aanval op ex-vrouw",
-    "s": "https://uitvaart-platform.nl/artikelen/twaalf-jaar-cel-en-tbs-na-dodelijke-aanval-op-ex-vrouw",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/4fe4fc898f553d0332bac565.webp",
-    "c": "",
-    "d": "2026-11-12",
-    "type": "nieuws"
-  },
-  {
     "t": "Waarom hangen er doodskisten aan een rotswand?",
     "s": "https://uitvaart-platform.nl/artikelen/waarom-hangen-er-doodskisten-aan-een-rotswand",
     "i": "https://uitvaart-platform.nl/foto/artikelen/8320da1fdfdb485fd21afd84.webp",
     "c": "",
     "d": "2026-11-12",
     "type": "evergreen"
-  },
-  {
-    "t": "Jaarcongres Rouw 2027: rouw verdient aandacht",
-    "s": "https://uitvaart-platform.nl/artikelen/jaarcongres-rouw-2027-rouw-verdient-aandacht",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/c67533bc3a47db50544663dd.webp",
-    "c": "",
-    "d": "2026-11-12",
-    "type": "nieuws"
-  },
-  {
-    "t": "DELA-klanten doelwit van phishing",
-    "s": "https://uitvaart-platform.nl/artikelen/dela-klanten-doelwit-van-phishing",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/d99fc5111c584859284a9c85.webp",
-    "c": "",
-    "d": "2026-11-11",
-    "type": "nieuws"
   },
   {
     "t": "Wat geven we onze dierbaren mee in het graf?",
@@ -117,14 +125,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/afdaed3da50f773a4850b85c.webp",
     "c": "",
     "d": "2026-11-07",
-    "type": "evergreen"
-  },
-  {
-    "t": "Onterfd: wat zijn je rechten?",
-    "s": "https://uitvaart-platform.nl/artikelen/onterfd-wat-zijn-je-rechten",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/acfb33eea36743e9f9bdc22c.webp",
-    "c": "",
-    "d": "2026-11-06",
     "type": "evergreen"
   }
 ]
