@@ -1,5 +1,53 @@
 [
   {
+    "t": "Digitale nalatenschap: wat gebeurt er met je accounts?",
+    "s": "https://uitvaart-platform.nl/artikelen/digitale-nalatenschap-wat-gebeurt-er-met-je-accounts",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/8ca35c6fe34335f61790a486.webp",
+    "c": "",
+    "d": "2026-11-16",
+    "type": "evergreen"
+  },
+  {
+    "t": "Stilgeboren baby nog bij je houden: wat mag en wat kan?",
+    "s": "https://uitvaart-platform.nl/artikelen/stilgeboren-baby-nog-bij-je-houden-wat-mag-en-wat-kan",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/60f25f27b1cf55f7f73eae93.webp",
+    "c": "",
+    "d": "2026-11-16",
+    "type": "evergreen"
+  },
+  {
+    "t": "Natuurbegraafplaatsen zijn ook big business",
+    "s": "https://uitvaart-platform.nl/artikelen/natuurbegraafplaatsen-zijn-ook-big-business",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/4e2b54ae9e32ca97bea34fb3.webp",
+    "c": "",
+    "d": "2026-11-16",
+    "type": "nieuws"
+  },
+  {
+    "t": "Erfbelasting kan in 2027 flink hoger uitvallen",
+    "s": "https://uitvaart-platform.nl/artikelen/erfbelasting-kan-in-2027-flink-hoger-uitvallen",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/7ac363160f3e3ff84a7b3e23.webp",
+    "c": "",
+    "d": "2026-11-16",
+    "type": "nieuws"
+  },
+  {
+    "t": "Van taboe naar wet: 40 jaar discussie over euthanasie",
+    "s": "https://uitvaart-platform.nl/artikelen/van-taboe-naar-wet-40-jaar-discussie-over-euthanasie",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/a9dfbfeab86f4fd2123d111c.webp",
+    "c": "",
+    "d": "2026-11-15",
+    "type": "evergreen"
+  },
+  {
+    "t": "Broers zorgen voor broer met dementie, goede doelen erven",
+    "s": "https://uitvaart-platform.nl/artikelen/broers-zorgen-voor-broer-met-dementie-goede-doelen-erven",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/b1afc59b1fbddeac9d41fb08.webp",
+    "c": "",
+    "d": "2026-11-15",
+    "type": "nieuws"
+  },
+  {
     "t": "Sliedrecht onderzoekt komst elektrisch crematorium",
     "s": "https://uitvaart-platform.nl/artikelen/sliedrecht-onderzoekt-komst-elektrisch-crematorium",
     "i": "https://uitvaart-platform.nl/foto/artikelen/17b3546c0dc358aae1f13e19.webp",
@@ -56,30 +104,6 @@
     "type": "nieuws"
   },
   {
-    "t": "Tynaarlo ruimt graven op De Eswal",
-    "s": "https://uitvaart-platform.nl/artikelen/tynaarlo-ruimt-graven-op-de-eswal",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/5367670cfd9431b7e6ff78dd.webp",
-    "c": "",
-    "d": "2026-11-13",
-    "type": "nieuws"
-  },
-  {
-    "t": "Erfenisgolf kan woningmarkt verder uit balans brengen",
-    "s": "https://uitvaart-platform.nl/artikelen/erfenisgolf-kan-woningmarkt-verder-uit-balans-brengen",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/2db4b5f70984a9d4544a0a39.webp",
-    "c": "",
-    "d": "2026-11-12",
-    "type": "nieuws"
-  },
-  {
-    "t": "Hoger beroep Erasmusschutter valt nabestaanden zwaar",
-    "s": "https://uitvaart-platform.nl/artikelen/hoger-beroep-erasmusschutter-valt-nabestaanden-zwaar",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/674335a23a4dbd12c4e1dc67.webp",
-    "c": "",
-    "d": "2026-11-12",
-    "type": "nieuws"
-  },
-  {
     "t": "Waarom hangen er doodskisten aan een rotswand?",
     "s": "https://uitvaart-platform.nl/artikelen/waarom-hangen-er-doodskisten-aan-een-rotswand",
     "i": "https://uitvaart-platform.nl/foto/artikelen/8320da1fdfdb485fd21afd84.webp",
@@ -101,30 +125,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/0a9ae2f8a44245aea4aa7b02.webp",
     "c": "",
     "d": "2026-11-10",
-    "type": "evergreen"
-  },
-  {
-    "t": "Grafsteen meenemen na ruiming begraafplaats",
-    "s": "https://uitvaart-platform.nl/artikelen/grafsteen-meenemen-na-ruiming-begraafplaats",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/0ac86e9bfdaab6af553dec12.webp",
-    "c": "",
-    "d": "2026-11-08",
-    "type": "evergreen"
-  },
-  {
-    "t": "Hoe zeg je nee tegen een uitvaartondernemer?",
-    "s": "https://uitvaart-platform.nl/artikelen/hoe-zeg-je-nee-tegen-een-uitvaartondernemer",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/01a3b6c221b98acb0c74ac29.webp",
-    "c": "",
-    "d": "2026-11-07",
-    "type": "evergreen"
-  },
-  {
-    "t": "Miljoenenerfenis: zo kun je nalaten aan cultuur",
-    "s": "https://uitvaart-platform.nl/artikelen/miljoenenerfenis-zo-kun-je-nalaten-aan-cultuur",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/afdaed3da50f773a4850b85c.webp",
-    "c": "",
-    "d": "2026-11-07",
     "type": "evergreen"
   }
 ]
