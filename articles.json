@@ -1,5 +1,53 @@
 [
   {
+    "t": "1 op de 7 overledenen laat geen naaste familie achter",
+    "s": "https://uitvaart-platform.nl/artikelen/1-op-de-7-overledenen-laat-geen-naaste-familie-achter",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/6e9496cd7fa4efe16153ede7.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "nieuws"
+  },
+  {
+    "t": "KFC organiseert nep-uitvaart voor GTA 6-fans",
+    "s": "https://uitvaart-platform.nl/artikelen/kfc-organiseert-nep-uitvaart-voor-gta-6-fans",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/03dd68c26659e6b410c32a44.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "nieuws"
+  },
+  {
+    "t": "Vlaanderen bestemt crematiemetalen voor goede doelen",
+    "s": "https://uitvaart-platform.nl/artikelen/vlaanderen-bestemt-crematiemetalen-voor-goede-doelen",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/0927521584f1941e03cce3d2.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "nieuws"
+  },
+  {
+    "t": "Eeuwenoude beuk bedreigt begraafplaats Zaltbommel",
+    "s": "https://uitvaart-platform.nl/artikelen/eeuwenoude-beuk-bedreigt-begraafplaats-zaltbommel",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/c274f1957a4a63b19df36b01.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "nieuws"
+  },
+  {
+    "t": "Goud in een erfenis: wat moeten erfgenamen regelen?",
+    "s": "https://uitvaart-platform.nl/artikelen/goud-in-een-erfenis-wat-moeten-erfgenamen-regelen",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/e1e226ac4c2407d27da3f2f2.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "evergreen"
+  },
+  {
+    "t": "Graven geruimd op begraafplaats in Vries",
+    "s": "https://uitvaart-platform.nl/artikelen/graven-geruimd-op-begraafplaats-in-vries",
+    "i": "https://uitvaart-platform.nl/foto/artikelen/56b3a1fa39df6edfc86b204a.webp",
+    "c": "",
+    "d": "2026-11-18",
+    "type": "nieuws"
+  },
+  {
     "t": "DELA onder vuur om keuze crematorium",
     "s": "https://uitvaart-platform.nl/artikelen/dela-onder-vuur-om-keuze-crematorium",
     "i": "https://uitvaart-platform.nl/foto/artikelen/84b3411a21fcd386c16378f6.webp",
@@ -24,14 +72,6 @@
     "type": "nieuws"
   },
   {
-    "t": "Natuurbegraven, maar niet voor altijd",
-    "s": "https://uitvaart-platform.nl/artikelen/natuurbegraven-maar-niet-voor-altijd",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/f25e68594c223d298d60bbc8.webp",
-    "c": "",
-    "d": "2026-11-17",
-    "type": "nieuws"
-  },
-  {
     "t": "Digitale nalatenschap: wat gebeurt er met je accounts?",
     "s": "https://uitvaart-platform.nl/artikelen/digitale-nalatenschap-wat-gebeurt-er-met-je-accounts",
     "i": "https://uitvaart-platform.nl/foto/artikelen/8ca35c6fe34335f61790a486.webp",
@@ -48,44 +88,12 @@
     "type": "evergreen"
   },
   {
-    "t": "Natuurbegraafplaatsen zijn ook big business",
-    "s": "https://uitvaart-platform.nl/artikelen/natuurbegraafplaatsen-zijn-ook-big-business",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/4e2b54ae9e32ca97bea34fb3.webp",
-    "c": "",
-    "d": "2026-11-16",
-    "type": "nieuws"
-  },
-  {
-    "t": "Erfbelasting kan in 2027 flink hoger uitvallen",
-    "s": "https://uitvaart-platform.nl/artikelen/erfbelasting-kan-in-2027-flink-hoger-uitvallen",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/7ac363160f3e3ff84a7b3e23.webp",
-    "c": "",
-    "d": "2026-11-16",
-    "type": "nieuws"
-  },
-  {
     "t": "Van taboe naar wet: 40 jaar discussie over euthanasie",
     "s": "https://uitvaart-platform.nl/artikelen/van-taboe-naar-wet-40-jaar-discussie-over-euthanasie",
     "i": "https://uitvaart-platform.nl/foto/artikelen/a9dfbfeab86f4fd2123d111c.webp",
     "c": "",
     "d": "2026-11-15",
     "type": "evergreen"
-  },
-  {
-    "t": "Broers zorgen voor broer met dementie, goede doelen erven",
-    "s": "https://uitvaart-platform.nl/artikelen/broers-zorgen-voor-broer-met-dementie-goede-doelen-erven",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/b1afc59b1fbddeac9d41fb08.webp",
-    "c": "",
-    "d": "2026-11-15",
-    "type": "nieuws"
-  },
-  {
-    "t": "Sliedrecht onderzoekt komst elektrisch crematorium",
-    "s": "https://uitvaart-platform.nl/artikelen/sliedrecht-onderzoekt-komst-elektrisch-crematorium",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/17b3546c0dc358aae1f13e19.webp",
-    "c": "",
-    "d": "2026-11-14",
-    "type": "nieuws"
   },
   {
     "t": "Herbegraven na overlijden: wanneer mag dat?",
@@ -117,14 +125,6 @@
     "i": "https://uitvaart-platform.nl/foto/artikelen/d33d1a02156ff95ddf1e01e8.webp",
     "c": "",
     "d": "2026-11-11",
-    "type": "evergreen"
-  },
-  {
-    "t": "Recepten van mama en oma bewaren",
-    "s": "https://uitvaart-platform.nl/artikelen/recepten-van-mama-en-oma-bewaren",
-    "i": "https://uitvaart-platform.nl/foto/artikelen/0a9ae2f8a44245aea4aa7b02.webp",
-    "c": "",
-    "d": "2026-11-10",
     "type": "evergreen"
   }
 ]
